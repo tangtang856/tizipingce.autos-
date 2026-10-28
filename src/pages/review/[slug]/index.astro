@@ -36,8 +36,9 @@ interface Props {
 
 const { airport, prevAirport, nextAirport } = Astro.props;
 
-const pageTitle = `${airport.name} 深度评测报告 2026 | 晚高峰测速、专线稳定性与套餐优缺点 - 梯子评测网`;
-const pageDescription = `2026最新 ${airport.name} 真实独立评测报告。实测晚高峰延迟、丢包率与 4K 秒开速度，深度解析套餐资费、节点线路、AI与流媒体解锁能力，提供客观购买建议。`;
+const pageTitle = airport.seo?.reviewTitle || `${airport.name} 深度评测报告 2026 | 晚高峰测速、专线稳定性与套餐优缺点 - 梯子评测网`;
+const pageDescription = airport.seo?.reviewDescription || `2026最新 ${airport.name} 真实独立评测报告。实测晚高峰延迟、丢包率与 4K 秒开速度，深度解析套餐资费、节点线路、AI与流媒体解锁能力，提供客观购买建议。`;
+const pageKeywords = airport.seo?.reviewKeywords || `${airport.name}, ${airport.name}评测, ${airport.name}怎么样, ${airport.name}官网, 梯子推荐, 机场节点, 科学上网`;
 
 const breadcrumbs = [
   { label: '独立评测', href: '/review/' },
@@ -101,7 +102,7 @@ const reviewSchema = {
 };
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="article" schema={reviewSchema}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} ogType="article" schema={reviewSchema}>
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <Breadcrumbs items={breadcrumbs} />
 

@@ -35,8 +35,9 @@ interface Props {
 
 const { airport, prevAirport, nextAirport } = Astro.props;
 
-const pageTitle = `${airport.name} 机场参数档案与套餐详情 | 梯子评测网`;
-const pageDescription = `${airport.name} 完整官方参数与实测档案。起步价格 ¥${airport.startingPrice}/月，线路采用 ${airport.lineType}，支持 ${airport.protocols.join('/')} 协议，提供 AI 与 4K 流媒体解锁能力及套餐横评。`;
+const pageTitle = airport.seo?.archiveTitle || `${airport.name} 机场参数档案与套餐详情 | 梯子评测网`;
+const pageDescription = airport.seo?.archiveDescription || `${airport.name} 完整官方参数与实测档案。起步价格 ¥${airport.startingPrice}/月，线路采用 ${airport.lineType}，支持 ${airport.protocols.join('/')} 协议，提供 AI 与 4K 流媒体解锁能力及套餐横评。`;
+const pageKeywords = airport.seo?.archiveKeywords || `${airport.name}, ${airport.name}官网, ${airport.name}节点, ${airport.name}套餐, 梯子推荐, 机场节点`;
 
 const breadcrumbs = [
   { label: '机场档案', href: '/recommend/' },
@@ -50,7 +51,7 @@ const relatedLinks = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords}>
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <Breadcrumbs items={breadcrumbs} />
 

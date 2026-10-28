@@ -16,6 +16,15 @@ export interface SpeedTestReport {
   testNodes: string[];
 }
 
+export interface AirportSeo {
+  reviewTitle?: string;
+  reviewDescription?: string;
+  reviewKeywords?: string;
+  archiveTitle?: string;
+  archiveDescription?: string;
+  archiveKeywords?: string;
+}
+
 export interface Airport {
   id: string;
   name: string;
@@ -59,6 +68,9 @@ export interface Airport {
   pricingAnalysis: string;
   customerServiceReputation: string;
   summaryVerdict: string;
+
+  // Custom SEO / TDK
+  seo?: AirportSeo;
 }
 
 export const AIRPORTS: Airport[] = [
@@ -2441,6 +2453,23 @@ export const AIRPORTS: Airport[] = [
     summaryVerdict: "浪网 WaveNet凭借坚实的自研客户端优化线路底座与¥30起的实惠门槛，为注重网络稳定性的用户提供了极高性价比的选择。",
   },
 ];
+
+import brandTdk from './brand-tdk.json';
+
+// Automatically merge custom TDK if configured in brand-tdk.json
+AIRPORTS.forEach((airport) => {
+  const custom = (brandTdk as Record<string, AirportSeo>)[airport.slug] || (brandTdk as Record<string, AirportSeo>)[airport.id];
+  if (custom) {
+    airport.seo = {
+      reviewTitle: custom.reviewTitle?.trim() || airport.seo?.reviewTitle,
+      reviewDescription: custom.reviewDescription?.trim() || airport.seo?.reviewDescription,
+      reviewKeywords: custom.reviewKeywords?.trim() || airport.seo?.reviewKeywords,
+      archiveTitle: custom.archiveTitle?.trim() || airport.seo?.archiveTitle,
+      archiveDescription: custom.archiveDescription?.trim() || airport.seo?.archiveDescription,
+      archiveKeywords: custom.archiveKeywords?.trim() || airport.seo?.archiveKeywords,
+    };
+  }
+});
 
 export function getAirportBySlug(slug: string): Airport | undefined {
   return AIRPORTS.find((a) => a.slug === slug);
