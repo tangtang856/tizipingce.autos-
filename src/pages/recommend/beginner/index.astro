@@ -6,7 +6,7 @@ import FaqAccordion from '@/components/FaqAccordion.astro';
 import RelatedArticles from '@/components/RelatedArticles.astro';
 import { getAllAirports } from '@/data/airports';
 
-const airports = getAllAirports().filter((a) => a.slug === 'flyingbird' || a.slug === 'kuaigou');
+const airports = getAllAirports().filter((a) => (a.startingPrice ?? 99) <= 10 || a.suitableFor.some((s) => s.includes('新手')));
 
 const pageTitle = '新手友好型机场推荐 | 一键导入与全平台客户端配置 - 梯子评测网';
 const pageDescription = '针对科学上网新手小白的机场推荐指南。精选支持全平台一键导入、拥有图形化中文客户端与傻瓜式新手教程的平价稳定机场，告别繁杂的参数配置。';

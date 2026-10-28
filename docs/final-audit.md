@@ -1,17 +1,17 @@
 # 梯子评测网 (tizipingce.autos) 自动化验收与 Bing SEO 审核报告
 
-**生成时间：** 2026-10-28T03:27:17.149Z  
+**生成时间：** 2026-10-28T04:11:53.506Z  
 **目标域名：** https://tizipingce.autos  
-**受审页面总数：** 48 篇静态 HTML  
+**受审页面总数：** 96 篇静态 HTML  
 **构建输出状态：** 🟢 验收全部通过 (0 Errors)  
 
 ## 一、核心技术 SEO 验收项目核对清单
 
 | 检查项目 | 验收指标要求 | 状态 | 详细说明 |
 | :--- | :--- | :---: | :--- |
-| **Astro 静态构建** | SSG 模式下成功编译输出至 dist/ | **PASS** | 成功生成 48 个完全静态 HTML 页面 |
+| **Astro 静态构建** | SSG 模式下成功编译输出至 dist/ | **PASS** | 成功生成 96 个完全静态 HTML 页面 |
 | **页面 Title 完整性** | 所有正式页面必须具备唯一独立 Title | **PASS** | 100% 页面均具备有效标题 |
-| **Title 唯一性防重复** | 禁止不同 URL 共享完全相同标题 | **PASS** | 检查 47 个独特标题，发现 0 个重复 |
+| **Title 唯一性防重复** | 禁止不同 URL 共享完全相同标题 | **PASS** | 检查 95 个独特标题，发现 0 个重复 |
 | **Meta Description** | 所有非404页面必须具备描述信息 | **PASS** | 正式落地页均配置详尽描述 |
 | **唯一 H1 标题** | 每页严格且仅允许一个 <h1> | **PASS** | 消除多 H1 冲突与 H1 缺失 |
 | **Canonical 规范化** | 统一指向 https://tizipingce.autos 绝对路径 | **PASS** | 无 localhost 或测试域名遗留 |
@@ -28,11 +28,35 @@
 | :--- | :--- | :---: | :---: |
 | `/404` | 抱歉，您访问的页面不存在 | **PASS** | ✓ |
 | `/about/` | 关于梯子评测网 (tizipingce.autos) | **PASS** | ✓ |
-| `/airport/flowercloud/` | FlowerCloud (花云) 机场综合档案 | **PASS** | ✓ |
-| `/airport/flyingbird/` | FlyingBird (飞鸟云) 机场综合档案 | **PASS** | ✓ |
-| `/airport/kuaigou/` | 快狗云 (KuaiGou Cloud) 机场综合档案 | **PASS** | ✓ |
-| `/airport/tag-internet/` | TAG Internet (TAG机场) 机场综合档案 | **PASS** | ✓ |
-| `/airport/wgetcloud/` | WgetCloud (原GaCloud) 机场综合档案 | **PASS** | ✓ |
+| `/airport/breezenet/` | 微风网络 Breezenet 机场综合档案 | **PASS** | ✓ |
+| `/airport/dalaocloud/` | 大佬云 机场综合档案 | **PASS** | ✓ |
+| `/airport/edgenova/` | 边缘节点 EdgeNova 机场综合档案 | **PASS** | ✓ |
+| `/airport/ermaoyun/` | 二猫云 2mao 机场综合档案 | **PASS** | ✓ |
+| `/airport/feimaoyun/` | 飞猫云 机场综合档案 | **PASS** | ✓ |
+| `/airport/feiv/` | 飞V 机场综合档案 | **PASS** | ✓ |
+| `/airport/firefly/` | 萤火虫（Firefly） 机场综合档案 | **PASS** | ✓ |
+| `/airport/flashleap/` | 闪跃 FlashLeap 机场综合档案 | **PASS** | ✓ |
+| `/airport/guangnianti/` | 光年梯 机场综合档案 | **PASS** | ✓ |
+| `/airport/jiliancloud/` | 极连云 机场综合档案 | **PASS** | ✓ |
+| `/airport/kexincloud/` | 可信云 机场综合档案 | **PASS** | ✓ |
+| `/airport/kuaili/` | 快狸 KuaiLi 机场综合档案 | **PASS** | ✓ |
+| `/airport/kuajiecloud/` | 跨界 机场综合档案 | **PASS** | ✓ |
+| `/airport/laddercloud/` | 梯子云 LadderCloud 机场综合档案 | **PASS** | ✓ |
+| `/airport/lightspeed/` | 光速云 LightSpeed 机场综合档案 | **PASS** | ✓ |
+| `/airport/lingdongcloud/` | 灵动云 机场综合档案 | **PASS** | ✓ |
+| `/airport/lingmao/` | 灵猫 机场综合档案 | **PASS** | ✓ |
+| `/airport/muguang/` | 暮光网络 机场综合档案 | **PASS** | ✓ |
+| `/airport/quanqiuyun/` | 全球云 机场综合档案 | **PASS** | ✓ |
+| `/airport/sogoyun/` | Sogo云 机场综合档案 | **PASS** | ✓ |
+| `/airport/stardream/` | 星岛梦 StarDream 机场综合档案 | **PASS** | ✓ |
+| `/airport/sujie/` | 速界 SuJie 机场综合档案 | **PASS** | ✓ |
+| `/airport/u1s1/` | U1S1（有一说一） 机场综合档案 | **PASS** | ✓ |
+| `/airport/v2yun/` | 唯兔云（V2云） 机场综合档案 | **PASS** | ✓ |
+| `/airport/wavenet/` | 浪网 WaveNet 机场综合档案 | **PASS** | ✓ |
+| `/airport/wuyou/` | 无忧 机场综合档案 | **PASS** | ✓ |
+| `/airport/yifanyun/` | 一翻云 1fly 机场综合档案 | **PASS** | ✓ |
+| `/airport/yinxingren/` | 隐形人 机场综合档案 | **PASS** | ✓ |
+| `/airport/yuzhoucloud/` | 宇宙云 YuZhou 机场综合档案 | **PASS** | ✓ |
 | `/blog/airport-speed-test-truth/` | 揭秘机场测速跑分真相：为什么全绿跑满千兆看视频依然卡顿？ | **PASS** | ✓ |
 | `/blog/clients-comparison/` | 全平台主流科学上网客户端横向评测与选型指南：Clash、Si... | **PASS** | ✓ |
 | `/blog/how-to-choose-airport/` | 如何科学挑选适合自己的机场梯子？避坑防跑路完整选购指南 | **PASS** | ✓ |
@@ -68,9 +92,33 @@
 | `/recommend/premium/` | 高端专线机场推荐：IPLC/IEPL 旗舰级出海网络 | **PASS** | ✓ |
 | `/recommend/stable/` | 高稳定性抗封锁机场推荐：晚高峰丝滑不卡顿 | **PASS** | ✓ |
 | `/recommend/streaming/` | 4K 流媒体超清秒开机场节点选购指南 | **PASS** | ✓ |
-| `/review/flowercloud/` | FlowerCloud (花云) 深度独立评测：网络表现、资... | **PASS** | ✓ |
-| `/review/flyingbird/` | FlyingBird (飞鸟云) 深度独立评测：网络表现、资... | **PASS** | ✓ |
+| `/review/breezenet/` | 微风网络 Breezenet 深度独立评测：网络表现、资费与... | **PASS** | ✓ |
+| `/review/dalaocloud/` | 大佬云 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/edgenova/` | 边缘节点 EdgeNova 深度独立评测：网络表现、资费与真... | **PASS** | ✓ |
+| `/review/ermaoyun/` | 二猫云 2mao 深度独立评测：网络表现、资费与真实优缺点全... | **PASS** | ✓ |
+| `/review/feimaoyun/` | 飞猫云 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/feiv/` | 飞V 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/firefly/` | 萤火虫（Firefly） 深度独立评测：网络表现、资费与真实... | **PASS** | ✓ |
+| `/review/flashleap/` | 闪跃 FlashLeap 深度独立评测：网络表现、资费与真实... | **PASS** | ✓ |
+| `/review/guangnianti/` | 光年梯 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
 | `/review/` | 独立机场深度评测专栏 | **PASS** | ✓ |
-| `/review/kuaigou/` | 快狗云 (KuaiGou Cloud) 深度独立评测：网络表... | **PASS** | ✓ |
-| `/review/tag-internet/` | TAG Internet (TAG机场) 深度独立评测：网络... | **PASS** | ✓ |
-| `/review/wgetcloud/` | WgetCloud (原GaCloud) 深度独立评测：网络... | **PASS** | ✓ |
+| `/review/jiliancloud/` | 极连云 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/kexincloud/` | 可信云 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/kuaili/` | 快狸 KuaiLi 深度独立评测：网络表现、资费与真实优缺点... | **PASS** | ✓ |
+| `/review/kuajiecloud/` | 跨界 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/laddercloud/` | 梯子云 LadderCloud 深度独立评测：网络表现、资费... | **PASS** | ✓ |
+| `/review/lightspeed/` | 光速云 LightSpeed 深度独立评测：网络表现、资费与... | **PASS** | ✓ |
+| `/review/lingdongcloud/` | 灵动云 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/lingmao/` | 灵猫 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/muguang/` | 暮光网络 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/quanqiuyun/` | 全球云 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/sogoyun/` | Sogo云 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/stardream/` | 星岛梦 StarDream 深度独立评测：网络表现、资费与真... | **PASS** | ✓ |
+| `/review/sujie/` | 速界 SuJie 深度独立评测：网络表现、资费与真实优缺点全... | **PASS** | ✓ |
+| `/review/u1s1/` | U1S1（有一说一） 深度独立评测：网络表现、资费与真实优缺... | **PASS** | ✓ |
+| `/review/v2yun/` | 唯兔云（V2云） 深度独立评测：网络表现、资费与真实优缺点全... | **PASS** | ✓ |
+| `/review/wavenet/` | 浪网 WaveNet 深度独立评测：网络表现、资费与真实优缺... | **PASS** | ✓ |
+| `/review/wuyou/` | 无忧 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/yifanyun/` | 一翻云 1fly 深度独立评测：网络表现、资费与真实优缺点全... | **PASS** | ✓ |
+| `/review/yinxingren/` | 隐形人 深度独立评测：网络表现、资费与真实优缺点全面解析 | **PASS** | ✓ |
+| `/review/yuzhoucloud/` | 宇宙云 YuZhou 深度独立评测：网络表现、资费与真实优缺... | **PASS** | ✓ |

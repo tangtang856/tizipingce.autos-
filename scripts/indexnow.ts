@@ -6,6 +6,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { AIRPORTS } from '../src/data/airports';
 
 const HOST = 'tizipingce.autos';
 const KEY = '0d4957e8492040689b7c8449c258d4a1';
@@ -126,26 +127,21 @@ async function main() {
       `https://${HOST}/ranking/stable/`,
       `https://${HOST}/compare/`,
       `https://${HOST}/review/`,
-      `https://${HOST}/review/flyingbird/`,
-      `https://${HOST}/review/flowercloud/`,
-      `https://${HOST}/review/tag-internet/`,
-      `https://${HOST}/review/wgetcloud/`,
-      `https://${HOST}/review/kuaigou/`,
-      `https://${HOST}/airport/flyingbird/`,
-      `https://${HOST}/airport/flowercloud/`,
-      `https://${HOST}/airport/tag-internet/`,
-      `https://${HOST}/airport/wgetcloud/`,
-      `https://${HOST}/airport/kuaigou/`,
+      ...AIRPORTS.map((a) => `https://${HOST}/review/${a.slug}/`),
+      ...AIRPORTS.map((a) => `https://${HOST}/airport/${a.slug}/`),
+      `https://${HOST}/guides/`,
       `https://${HOST}/guides/windows/`,
       `https://${HOST}/guides/android/`,
       `https://${HOST}/guides/ios/`,
       `https://${HOST}/guides/macos/`,
       `https://${HOST}/guides/appletv-router/`,
+      `https://${HOST}/blog/`,
       `https://${HOST}/blog/vpn-vs-airport-guide/`,
       `https://${HOST}/blog/how-to-choose-airport/`,
       `https://${HOST}/blog/subscription-security/`,
       `https://${HOST}/blog/clients-comparison/`,
       `https://${HOST}/blog/airport-speed-test-truth/`,
+      `https://${HOST}/glossary/`,
       `https://${HOST}/glossary/node-types/`,
       `https://${HOST}/glossary/what-is-vpn-node/`,
       `https://${HOST}/glossary/protocols/`,
