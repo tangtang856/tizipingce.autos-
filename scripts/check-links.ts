@@ -60,6 +60,17 @@ AIRPORTS.forEach((a) => {
   validRoutes.add(`/review/${a.slug}/`);
 });
 
+// Add dynamic routes from content collections
+['blog', 'guides', 'glossary'].forEach((folder) => {
+  const dir = path.resolve(process.cwd(), `src/content/${folder}`);
+  if (fs.existsSync(dir)) {
+    fs.readdirSync(dir).forEach((file) => {
+      const slug = file.replace(/\.(md|mdx)$/, '');
+      validRoutes.add(`/${folder}/${slug}/`);
+    });
+  }
+});
+
 let linkErrors = 0;
 let checkedLinksCount = 0;
 

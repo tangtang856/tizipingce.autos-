@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: { slug: guide.id.replace(/\.(md|mdx)$/, '') },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+
+const pageTitle = `${guide.data.title} | 梯子评测网教程中心`;
+const pageDescription = guide.data.description;
+
+const platformLabels: Record<string, string> = {
+  windows: 'Windows 电脑',
+  android: 'Android 安卓',
+  ios: 'iOS 苹果手机',
+  macos: 'macOS 苹果电脑',
+  general: '通用与软路由',
+};
+
+const breadcrumbs = [
+  { label: '使用教程', href: '/guides/' },
+  { label: guide.data.title, href: `/guides/${guide.id.replace(/\.(md|mdx)$/, '')}/` },
+];
+
+const relatedLinks = [
+  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
+  { title: '高性价比机场排行榜', href: '/ranking/value/', category: '排行榜' },
+  { title: '多品牌同屏横向对比工具', href: '/compare/', category: '在线工具' },
+  { title: '常见代理协议优缺点深度科普', href: '/glossary/protocols/', category: '术语百科' },
+];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: guide.data.title,
+  description: guide.data.description,
+  datePublished: guide.data.pubDate.toISOString(),
+  dateModified: guide.data.updatedDate?.toISOString() || guide.data.pubDate.toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: '梯子评测网技术团队',
+  },
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="article" schema={articleSchema}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article class="max-w-prose mx-auto">
+      <header class="mb-8 pb-6 border-b border-slate-200">
+        <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500 mb-3">
+          <span class="px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-700 font-semibold">
+            {platformLabels[guide.data.platform] || '综合教程'}
+          </span>
+          <span>难度：{guide.data.difficulty}</span>
+          <span>预计阅读：{guide.data.readingTime}</span>
+          <span>更新于：{guide.data.updatedDate?.toISOString().slice(0, 10) || guide.data.pubDate.toISOString().slice(0, 10)}</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          {guide.data.title}
+        </h1>
+        <p class="text-base text-slate-600 leading-relaxed">
+          {guide.data.description}
+        </p>
+      </header>
+
+      <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-5">
+        <Content />
+      </div>
+
+      <RelatedArticles links={relatedLinks} />
+    </article>
+  </div>
+</BaseLayout>

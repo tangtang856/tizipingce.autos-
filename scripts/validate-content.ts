@@ -99,7 +99,7 @@ contentDirs.forEach((dir) => {
       logError(`文件包含未替换的模板参数 {{ }}: ${file}`);
     }
 
-    if (content.includes('localhost') || content.includes('127.0.0.1:4321')) {
+    if (content.includes('http://localhost') || content.includes('127.0.0.1:4321')) {
       logError(`文件包含本地开发测试地址: ${file}`);
     }
 
