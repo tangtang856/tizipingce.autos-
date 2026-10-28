@@ -1,6 +1,6 @@
 # 梯子评测网 (tizipingce.autos) 自动化验收与 Bing SEO 审核报告
 
-**生成时间：** 2026-10-28T05:24:17.833Z  
+**生成时间：** 2026-10-28T05:29:10.149Z  
 **目标域名：** https://tizipingce.autos  
 **受审页面总数：** 316 篇静态 HTML  
 **构建输出状态：** 🟢 验收全部通过 (0 Errors)  
@@ -299,7 +299,7 @@
 | `/guides/windows-singbox/` | Sing-box Windows客户端配置教程：轻量级内核与... | **PASS** | ✓ |
 | `/guides/windows-uwp-loopback/` | Windows UWP应用回环代理排障教程：微软商店、Xbo... | **PASS** | ✓ |
 | `/guides/windows-v2rayn/` | v2rayN电脑客户端高级配置教程：订阅导入、分流规则与内核... | **PASS** | ✓ |
-| `/` | 2026年稳定优质机场推荐与梯子评测指南 | **PASS** | ✓ |
+| `/` | 2026年稳定优质机场推荐与梯子推荐指南 | **PASS** | ✓ |
 | `/privacy-policy/` | 隐私权保护政策 | **PASS** | ✓ |
 | `/ranking/budget/` | 2026 平价低预算机场与梯子排行榜 | **PASS** | ✓ |
 | `/ranking/overall/` | 2026 优质机场与梯子综合实力排行榜 | **PASS** | ✓ |

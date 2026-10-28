@@ -14,8 +14,9 @@ const featuredAirports = allAirports.slice(0, 4);
 const recentBlog = (await getCollection('blog')).slice(0, 3);
 const recentGlossary = (await getCollection('glossary')).slice(0, 4);
 
-const pageTitle = '2026机场推荐与梯子选购指南 | 优质VPN节点与高性价比机场评测 - 梯子评测网';
-const pageDescription = '梯子评测网（tizipingce.autos）为您提供2026最新高性价比机场推荐与梯子选购指南。基于真实晚高峰测速、物理IPLC专线丢包率、海外流媒体与ChatGPT解锁进行深度评测，助您告别断连与虚假跑分。';
+const pageTitle = '2026机场推荐与梯子推荐网 | 优质性价比机场、VPN机场与VPN节点实测 - 梯子评测网';
+const pageDescription = '梯子评测网（tizipingce.autos）专注2026最新机场推荐、梯子推荐与VPN推荐排行榜。深度实测29家性价比机场与优质VPN机场节点，提供真实晚高峰测速、4K秒开丢包率与客户端配置教程。';
+const pageKeywords = '机场推荐, 机场节点, 性价比机场, 梯子推荐, vpn, vpn机场, vpn节点, vpn推荐, 梯子评测';
 
 const homepageFaq = [
   {
@@ -37,7 +38,7 @@ const homepageFaq = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords}>
   <!-- Section 2: Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-surface-50 to-surface-50 pt-12 pb-16 border-b border-slate-200">
     <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,12 +51,12 @@ const homepageFaq = [
 
         <!-- Single Unique H1 -->
         <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">
-          2026年稳定优质<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 to-brand-500">机场推荐</span>与梯子评测指南
+          2026年稳定优质<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 to-brand-500">机场推荐</span>与梯子推荐指南
         </h1>
 
         <!-- Direct Answer / Needs Fulfillment -->
         <p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
-          告别花哨测速跑分与野鸡机场跑路陷阱。我们为您持续跟踪主流<strong>性价比机场、IPLC 专线梯子与 VPN 节点</strong>的真实晚高峰丢包率、流媒体 4K 播放与 ChatGPT 解锁表现，让出海选择更加省心可靠。
+          告别花哨测速跑分与野鸡机场跑路陷阱。我们为您持续跟踪主流<strong>性价比机场、IPLC 专线梯子推荐、高可用 VPN 机场与优质 VPN 节点</strong>的真实晚高峰丢包率、流媒体 4K 播放与 ChatGPT 解锁表现，让科学上网出海选择更加省心可靠。
         </p>
 
         <!-- Main Entrances / CTAs -->
