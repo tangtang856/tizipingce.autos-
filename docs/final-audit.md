@@ -1,6 +1,6 @@
 # 梯子评测网 (tizipingce.autos) 自动化验收与 Bing SEO 审核报告
 
-**生成时间：** 2026-10-28T04:17:22.828Z  
+**生成时间：** 2026-10-28T04:27:19.795Z  
 **目标域名：** https://tizipingce.autos  
 **受审页面总数：** 316 篇静态 HTML  
 **构建输出状态：** 🟢 验收全部通过 (0 Errors)  
@@ -269,13 +269,13 @@
 | `/glossary/subconverter/` | 什么是订阅转换？工作原理、作用与隐私泄露风险防范 | **PASS** | ✓ |
 | `/glossary/what-is-vpn-node/` | 什么是VPN节点？工作原理、作用与安全配置要点科普 | **PASS** | ✓ |
 | `/guides/android/` | Android安卓手机科学上网客户端配置教程：Clash M... | **PASS** | ✓ |
-| `/guides/android-background-keepalive/` | 安卓手机科学上网后台频繁断连？华为鸿蒙与小米澎湃系统保活终极... | **PASS** | ✓ |
-| `/guides/android-singbox/` | Sing-box Android版配置指南：原生图形客户端与... | **PASS** | ✓ |
-| `/guides/android-surfboard/` | Surfboard冲浪板安卓客户端新手教程：仿Surge清爽... | **PASS** | ✓ |
-| `/guides/android-v2rayng/` | v2rayNG安卓手机科学上网教程：零基础订阅导入与分应用代... | **PASS** | ✓ |
+| `/guides/android-background-keepalive/` | 安卓手机代理客户端后台常驻保活终极指南：告别息屏断流与断网卡... | **PASS** | ✓ |
+| `/guides/android-singbox/` | Sing-box for Android 极速配置指南：原生... | **PASS** | ✓ |
+| `/guides/android-surfboard/` | Surfboard安卓冲浪板配置全指南：类Surge体验的高... | **PASS** | ✓ |
+| `/guides/android-v2rayng/` | v2rayNG手机安卓版零基础实操教程：多协议支持与扫码极速... | **PASS** | ✓ |
 | `/guides/appletv-router/` | Apple TV与家庭局域网软路由透明网关科学上网配置指南 | **PASS** | ✓ |
-| `/guides/console-ps5-xbox/` | PS5与Xbox游戏主机联机加速与代理分流教程：告别NAT3... | **PASS** | ✓ |
-| `/guides/console-switch-eshop/` | Nintendo Switch网络加速教程：eShop跨区秒... | **PASS** | ✓ |
+| `/guides/console-ps5-xbox/` | PS5与Xbox主机游戏出海加速图文指南：优化NAT类型与消... | **PASS** | ✓ |
+| `/guides/console-switch-eshop/` | 任天堂Switch eShop商店加速与游戏联机教程：手机热... | **PASS** | ✓ |
 | `/guides/docker-subconverter-selfhost/` | 自建专属订阅转换服务教程：基于Docker私有化部署Subc... | **PASS** | ✓ |
 | `/guides/general-switchyomega/` | Chrome与Edge浏览器SwitchyOmega代理插件... | **PASS** | ✓ |
 | `/guides/general-telegram-proxy/` | Telegram电报客户端内置Socks5与MTProto代... | **PASS** | ✓ |
@@ -297,7 +297,7 @@
 | `/guides/windows/` | Windows电脑科学上网配置教程：Clash Verge ... | **PASS** | ✓ |
 | `/guides/windows-nekobox/` | NekoBox for Windows配置教程：支持Hyst... | **PASS** | ✓ |
 | `/guides/windows-singbox/` | Sing-box Windows客户端配置教程：轻量级内核与... | **PASS** | ✓ |
-| `/guides/windows-uwp-loopback/` | Windows系统Clash导致UWP应用与微软商店无法联网... | **PASS** | ✓ |
+| `/guides/windows-uwp-loopback/` | Windows UWP应用回环代理排障教程：微软商店、Xbo... | **PASS** | ✓ |
 | `/guides/windows-v2rayn/` | v2rayN电脑客户端高级配置教程：订阅导入、分流规则与内核... | **PASS** | ✓ |
 | `/` | 2026年稳定优质机场推荐与梯子评测指南 | **PASS** | ✓ |
 | `/privacy-policy/` | 隐私权保护政策 | **PASS** | ✓ |
