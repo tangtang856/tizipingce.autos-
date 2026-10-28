@@ -1,6 +1,6 @@
 # 梯子评测网 (tizipingce.autos) 自动化验收与 Bing SEO 审核报告
 
-**生成时间：** 2026-10-28T05:29:10.149Z  
+**生成时间：** 2026-10-28T05:33:29.983Z  
 **目标域名：** https://tizipingce.autos  
 **受审页面总数：** 316 篇静态 HTML  
 **构建输出状态：** 🟢 验收全部通过 (0 Errors)  
@@ -154,7 +154,7 @@
 | `/blog/hysteria-2-quic-brutal-congestion-control/` | Hysteria 2协议全景测评：基于QUIC的暴力抗丢包技... | **PASS** | ✓ |
 | `/blog/iepl-vs-iplc-ethernet-private-line-differences/` | IEPL与IPLC有何本质技术不同？二层以太网物理专线优势大... | **PASS** | ✓ |
 | `/blog/incognito-mode-with-proxy-node-privacy-guide/` | 浏览器无痕模式搭配科学上网节点的真正作用与认知误区 | **PASS** | ✓ |
-| `/blog/` | 出海资讯与代理技术博客专栏 | **PASS** | ✓ |
+| `/blog/` | 机场推荐、梯子推荐与科学上网技术博客 | **PASS** | ✓ |
 | `/blog/influencer-marketing-outreach-and-large-file-sync/` | 海外网红KOL营销邮件联络与物料传输专属大文件上传网络优化 | **PASS** | ✓ |
 | `/blog/international-gateway-qos-evening-peak-slowdown/` | 什么是国际出口晚高峰QoS限速？为什么电信在晚上9点经常大卡... | **PASS** | ✓ |
 | `/blog/internet-exchange-point-ixp-and-peering-explained/` | 什么是互联网交换中心(IXP)与机房BGP互联？全球数据如何... | **PASS** | ✓ |

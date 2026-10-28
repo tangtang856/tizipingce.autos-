@@ -6,28 +6,41 @@ import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const pageTitle = '出海资讯与博客科普专栏 | 梯子评测网';
-const pageDescription = '梯子评测网博客专栏。提供 VPN 与机场的区别科普、机场选购避坑指南、测速真相揭秘、客户端选型对比以及订阅链接安全防护等深度干货内容。';
+const pageTitle = '机场推荐与梯子推荐技术博客 | 优质VPN机场节点与性价比梯子选购专栏 - 梯子评测网';
+const pageDescription = '梯子评测网博客专栏汇聚200+篇原创出海指南。深度覆盖2026权威机场推荐与梯子推荐、高性价比机场选购实测、VPN机场与高速VPN节点搭建调优、科学上网防封避坑技巧。';
+const pageKeywords = '机场推荐, 机场节点, 性价比机场, 梯子推荐, vpn, vpn机场, vpn节点, vpn推荐, 梯子评测, 科学上网博客';
 
 const breadcrumbs = [
   { label: '博客专栏', href: '/blog/' },
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords}>
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <Breadcrumbs items={breadcrumbs} />
 
     <header class="max-w-3xl mb-10">
       <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
-        <span>✍️ 原创深度解析</span>
+        <span>✍️ 200+ 篇原创深度技术长文</span>
       </div>
       <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
-        出海资讯与代理技术博客专栏
+        机场推荐、梯子推荐与科学上网技术博客
       </h1>
-      <p class="text-base text-slate-600 leading-relaxed">
-        摆脱晦涩难懂的技术门槛。由一线网络工程师与资深出海用户执笔，带来硬核客观的代理协议科普、安全防护建议与选型实操。
+      <p class="text-base text-slate-600 leading-relaxed mb-6">
+        摆脱晦涩难懂的技术门槛。由一线网络工程师与资深出海用户执笔，深度涵盖<strong>机场推荐、梯子推荐、高性价比机场、VPN机场与高速VPN节点</strong>的实测调优、防封避坑与客户端选型实操。
       </p>
+
+      <!-- 8大核心主题分类快速筛选导航 -->
+      <div class="flex flex-wrap items-center gap-2 pt-2">
+        <span class="text-xs font-bold text-slate-400">🔥 核心专题导航：</span>
+        <a href="/ranking/overall/" class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-semibold hover:bg-brand-100 transition-colors">机场推荐总榜</a>
+        <a href="/ranking/value/" class="px-3 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">性价比机场</a>
+        <a href="/recommend/" class="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold hover:bg-blue-100 transition-colors">梯子推荐</a>
+        <a href="/recommend/stable/" class="px-3 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-semibold hover:bg-indigo-100 transition-colors">高可用VPN机场</a>
+        <a href="/glossary/node-types/" class="px-3 py-1 rounded-lg bg-purple-50 text-purple-700 text-xs font-semibold hover:bg-purple-100 transition-colors">机场节点解析</a>
+        <a href="/glossary/what-is-vpn-node/" class="px-3 py-1 rounded-lg bg-amber-50 text-amber-700 text-xs font-semibold hover:bg-amber-100 transition-colors">VPN节点科普</a>
+        <a href="/ranking/overall/" class="px-3 py-1 rounded-lg bg-rose-50 text-rose-700 text-xs font-semibold hover:bg-rose-100 transition-colors">VPN推荐横评</a>
+      </div>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
