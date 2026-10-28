@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const pageTitle = '联系我们与信息勘误 | 梯子评测网';
+const pageDescription = '联系梯子评测网（tizipingce.autos）编辑团队。提供内容勘误、数据纠错、技术交流与合规咨询沟通渠道。';
+
+const breadcrumbs = [
+  { label: '联系我们', href: '/contact/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article class="max-w-prose mx-auto">
+      <header class="mb-10 pb-6 border-b border-slate-200">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          联系我们与信息勘误
+        </h1>
+        <p class="text-base text-slate-600 leading-relaxed">
+          如果您在浏览过程中发现任何价格变更、失效链接、技术错误，或有正规商务咨询，欢迎与我们沟通。
+        </p>
+      </header>
+
+      <div class="space-y-8 text-sm sm:text-base text-slate-700">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold mb-4">
+              ✉️
+            </div>
+            <h2 class="text-lg font-bold text-slate-900 mb-1">官方联络邮箱</h2>
+            <p class="text-xs text-slate-500 mb-3">日常咨询与重要事务对接</p>
+            <a href="mailto:contact@tizipingce.autos" class="text-brand-600 font-mono font-medium hover:underline text-sm">
+              contact@tizipingce.autos
+            </a>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold mb-4">
+              🐙
+            </div>
+            <h2 class="text-lg font-bold text-slate-900 mb-1">GitHub 仓库</h2>
+            <p class="text-xs text-slate-500 mb-3">提出 Issue 或提交 PR 勘误</p>
+            <a
+              href="https://github.com/tangtang856/tizipingce.autos"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-brand-600 font-mono font-medium hover:underline text-sm"
+            >
+              github.com/tangtang856/tizipingce.autos
+            </a>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm">勘误与纠错反馈提示：</h3>
+          <p>提交纠错信息时，请尽量附带：1. 涉及的具体页面 URL；2. 准确的官方定价或公告截图依据；3. 实测宽带环境说明。我们将在收到后快速复核并更新页面。</p>
+          <p class="text-slate-400">注意：本站为独立媒体，不提供任何机场的客户服务或账号充值找回。如遇账号密码遗失或节点无法使用，请前往对应机场官方控制台提交工单。</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

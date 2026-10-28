@@ -1,0 +1,86 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports().filter((a) => a.slug === 'flyingbird' || a.slug === 'kuaigou');
+
+const pageTitle = '新手友好型机场推荐 | 一键导入与全平台客户端配置 - 梯子评测网';
+const pageDescription = '针对科学上网新手小白的机场推荐指南。精选支持全平台一键导入、拥有图形化中文客户端与傻瓜式新手教程的平价稳定机场，告别繁杂的参数配置。';
+
+const breadcrumbs = [
+  { label: '机场推荐', href: '/recommend/budget/' },
+  { label: '新手入门推荐', href: '/recommend/beginner/' },
+];
+
+const faqItems = [
+  {
+    question: '小白完全不懂什么是节点、配置，能用吗？',
+    answer: '完全可以！现在主流机场均支持“一键导入订阅”。你只需下载对应的客户端（如 Windows 下的 Clash Verge Rev 或手机端小火箭），在机场网站后台点击“一键导入”，即可自动下载全部节点并开启代理。',
+  },
+  {
+    question: '遇到节点全部超时连接不上怎么办？',
+    answer: '常见原因有三：1. 电脑或手机本地系统时间与国际标准时间不同步（相差超过 1 分钟会导致 TLS 证书握手失败）；2. 订阅链接过期未更新，需手动在客户端点击“更新订阅”；3. 客户端未开启“系统代理”开关。',
+  },
+];
+
+const relatedLinks = [
+  { title: 'Windows电脑配置教程 (Clash Verge)', href: '/guides/windows/', category: '客户端教程' },
+  { title: 'Android安卓手机配置教程', href: '/guides/android/', category: '客户端教程' },
+  { title: 'iOS苹果手机小火箭配置教程', href: '/guides/ios/', category: '客户端教程' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-3">
+        <span>🌱 零门槛小白友好</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        小白新手首选机场与零门槛使用指南
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        不用学习复杂路由规则，无需编写 YAML 配置文件。本专题筛选出后台交互人性化、支持一键导入主流客户端、客服响应及时的适合新手的机场。
+      </p>
+    </header>
+
+    <section class="mb-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport) => (
+          <AirportCard airport={airport} highlightFeature="一键导入 / 新手友好" />
+        ))}
+      </div>
+    </section>
+
+    <!-- Quick Start 3 Steps -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-12">
+      <h2 class="text-lg font-bold text-slate-900 mb-4">新手三分钟极速上手出海流程</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <span class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold text-sm flex items-center justify-center mb-2">1</span>
+          <h3 class="font-bold text-slate-900 mb-1">注册账号并选购套餐</h3>
+          <p class="text-xs text-slate-500">选择新手推荐的机场，先购买月付入门套餐（建议月付15-20元档位尝鲜）。</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <span class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold text-sm flex items-center justify-center mb-2">2</span>
+          <h3 class="font-bold text-slate-900 mb-1">下载对应系统客户端</h3>
+          <p class="text-xs text-slate-500">根据设备参考本站对应教程下载软件（如电脑用 Clash Verge，安卓用 Clash Meta）。</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <span class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold text-sm flex items-center justify-center mb-2">3</span>
+          <h3 class="font-bold text-slate-900 mb-1">点击一键导入并开启</h3>
+          <p class="text-xs text-slate-500">在机场后台点击“一键导入订阅”，软件自动拉取节点，打开系统代理即可畅享全球网络。</p>
+        </div>
+      </div>
+    </section>
+
+    <FaqAccordion items={faqItems} title="新手常见踩坑与解答" />
+    <RelatedArticles links={relatedLinks} />
+  </div>
+</BaseLayout>

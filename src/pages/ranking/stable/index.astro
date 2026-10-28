@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import RankingTable from '@/components/RankingTable.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import { getRankedAirports } from '@/data/airports';
+
+const airports = getRankedAirports('stable');
+
+const pageTitle = '2026机场稳定性排行榜 | 晚高峰抗封锁表现实测榜 - 梯子评测网';
+const pageDescription = '2026年高稳定性机场排行榜与梯子节点推荐。专注物理内网 IPLC/IEPL 企业级专线网络，针对敏感时期防封锁、晚高峰 4K 播放丢包率及游戏低延迟进行全方位严苛评测。';
+
+const breadcrumbs = [
+  { label: '机场排行', href: '/ranking/overall/' },
+  { label: '稳定性排行', href: '/ranking/stable/' },
+];
+
+const faqItems = [
+  {
+    question: '为什么 IPLC/IEPL 专线比普通中继更稳定？',
+    answer: 'IPLC（国际私有租用线路）和 IEPL 是两端通过陆缆或海缆进行点对点物理内网直连，其跨境数据完全不经过中国公网防火墙（GFW）的审查与干扰，因此在特殊敏感时期几乎不受断流、丢包和封锁影响。',
+  },
+  {
+    question: '晚高峰（20:00-23:00）为什么普通机场容易卡顿？',
+    answer: '晚高峰属于国际出口公网骨干网拥塞时段。普通公网中继和直连 VPS 会遭遇运营商的 QoS 限速和严重丢包；而企业级专线拥有独立保障的固定物理带宽，不受民用公网拥堵影响。',
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-10">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 mb-3">
+        <span>🛡️ 物理专线抗封锁榜</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        2026 机场网络连接稳定性排行榜
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        告别开会频繁掉线、游戏跳 ping 和晚高峰看视频转圈。本榜单专注评估采用优质 IPLC/IEPL 内网专线与自研 BGP 容灾调度的高稳定性机场。
+      </p>
+    </header>
+
+    <section class="mb-14">
+      <RankingTable airports={airports} />
+    </section>
+
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">高稳定性代表品牌深度评析</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport, index) => (
+          <AirportCard airport={airport} rankBadge={index + 1} highlightFeature="高可用物理专线" />
+        ))}
+      </div>
+    </section>
+
+    <FaqAccordion items={faqItems} title="稳定性与网络架构深度答疑" />
+  </div>
+</BaseLayout>

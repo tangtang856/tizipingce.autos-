@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.(md|mdx)$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const pageTitle = `${post.data.title} | 梯子评测网`;
+const pageDescription = post.data.description;
+
+const breadcrumbs = [
+  { label: '博客文章', href: '/blog/' },
+  { label: post.data.title, href: `/blog/${post.id.replace(/\.(md|mdx)$/, '')}/` },
+];
+
+const relatedLinks = [
+  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
+  { title: '高性价比机场排行榜', href: '/ranking/value/', category: '排行榜' },
+  { title: '多品牌同屏横向对比工具', href: '/compare/', category: '在线工具' },
+];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: post.data.author || '梯子评测网编辑团队',
+  },
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="article" schema={articleSchema}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article class="max-w-prose mx-auto">
+      <header class="mb-10 pb-6 border-b border-slate-200">
+        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-3">
+          <span class="px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-700 font-semibold">
+            {post.data.category}
+          </span>
+          <span>发布：{post.data.pubDate.toISOString().slice(0, 10)}</span>
+          {post.data.updatedDate && (
+            <span>更新：{post.data.updatedDate.toISOString().slice(0, 10)}</span>
+          )}
+          <span>作者：{post.data.author}</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          {post.data.title}
+        </h1>
+        <p class="text-base text-slate-600 leading-relaxed">
+          {post.data.description}
+        </p>
+      </header>
+
+      <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-5">
+        <Content />
+      </div>
+
+      <RelatedArticles links={relatedLinks} />
+    </article>
+  </div>
+</BaseLayout>

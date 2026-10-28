@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports().filter((a) => (a.aiSupport?.length ?? 0) >= 2);
+
+const pageTitle = '支持ChatGPT与Claude的AI专用机场推荐 | 原生IP纯净节点 - 梯子评测网';
+const pageDescription = '2026年适合 ChatGPT、Claude、Midjourney、Perplexity 等生成式 AI 工具的专用机场推荐。精选具备原生纯净 IP 池、极低风控拦截率与高并发 API 支持的优质机场节点。';
+
+const breadcrumbs = [
+  { label: '机场推荐', href: '/recommend/budget/' },
+  { label: 'AI与ChatGPT推荐', href: '/recommend/ai/' },
+];
+
+const faqItems = [
+  {
+    question: '为什么打开 ChatGPT 提示 Access Denied 或 1020 报错？',
+    answer: 'OpenAI 与 Cloudflare 部署了严厉的反爬虫与 IP 风控系统。当大量用户共享同一个廉价数据中心机房 IP 登录时，该 IP 会被 OpenAI 列入黑名单拦截。解决办法是使用提供住宅（Residential）或高纯净原生 IP 的机场专线节点。',
+  },
+  {
+    question: 'Claude 对节点 IP 的要求比 ChatGPT 更严吗？',
+    answer: '是的。Anthropic 对 Claude 注册与登录的风控机制极其敏感，很多能正常打开 ChatGPT 的节点在访问 Claude 时会遭遇封号或抱歉页面。建议选择如 FlowerCloud 或 TAG 等提供原生家宽/商用专线优化的节点，并固定使用同一地区。',
+  },
+];
+
+const relatedLinks = [
+  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
+  { title: '什么是VPN节点？工作原理科普', href: '/glossary/what-is-vpn-node/', category: '术语百科' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-3">
+        <span>🤖 原生IP与低风控保障</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        ChatGPT 与海外 AI 工具专用高纯净度机场推荐
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        告别频繁出现 Cloudflare 人机验证、账号被 OpenAI 临时冻结以及 Claude 封号风险。本专题筛选具备大厂原生 IP、低黑名单污染率的优质 AI 生产力节点。
+      </p>
+    </header>
+
+    <section class="mb-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport) => (
+          <AirportCard airport={airport} highlightFeature="原生AI防风控" />
+        ))}
+      </div>
+    </section>
+
+    <!-- AI Checklist -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-12">
+      <h2 class="text-lg font-bold text-slate-900 mb-3">日常使用 AI 工具的 4 个防封建议</h2>
+      <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5 leading-relaxed">
+        <li><strong>固定节点地区：</strong>尽量长期使用同一地区节点（如美国西岸或台湾），切忌 5 分钟内从美国跳到新加坡。</li>
+        <li><strong>使用浏览器无痕模式或独立 Profile：</strong>避免浏览器扩展插件或历史 Cookie 冲突触发风控。</li>
+        <li><strong>绑定海外虚拟卡支付 Plus：</strong>绑卡付款时务必确认节点 IP 的 GeoIP 归属与账单地址一致。</li>
+        <li><strong>避开多人挤兑的免翻镜像：</strong>使用独立客户端走机场专线直连官方网站，数据与隐私更安全。</li>
+      </ul>
+    </section>
+
+    <FaqAccordion items={faqItems} title="AI与ChatGPT节点常见问题" />
+    <RelatedArticles links={relatedLinks} />
+  </div>
+</BaseLayout>

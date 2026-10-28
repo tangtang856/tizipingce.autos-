@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const pageTitle = '关于梯子评测网 | 独立客观的中文网络工具评测媒体';
+const pageDescription = '梯子评测网（tizipingce.autos）致力于为中文互联网出海用户提供客观、真实、可复现的机场节点评测、排行榜与客户端配置指南。拒绝虚假跑分，坚持数据溯源。';
+
+const breadcrumbs = [
+  { label: '关于本站', href: '/about/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article class="max-w-prose mx-auto">
+      <header class="mb-10 pb-6 border-b border-slate-200">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          关于梯子评测网 (tizipingce.autos)
+        </h1>
+        <p class="text-base text-slate-600 leading-relaxed">
+          建立一个真正透明、尊重事实、以技术数据为根基的中文网络出海评测与知识媒体。
+        </p>
+      </header>
+
+      <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-6">
+        <h2 class="text-2xl font-bold text-slate-900">一、我们的创立初衷</h2>
+        <p>
+          在当前的中文网络生态中，围绕“翻墙”、“机场推荐”、“科学上网”的信息环境充斥着大量的浮躁与信息不对称：
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>野鸡泛滥：</strong>利用廉价开源面板搭建的野生小作坊，在贴吧或群聊中大肆宣传，收取年费后数周内跑路；</li>
+          <li><strong>虚构测速：</strong>博主为了赚取推广高额佣金，仅在半夜闲时截取单次并发极速图，完全无视晚高峰丢包与断连；</li>
+          <li><strong>术语欺骗：</strong>把廉价的公网直连节点包装成高大上的“企业级 IPLC 专线”，误导新手消费者。</li>
+        </ul>
+        <p>
+          <strong>梯子评测网（tizipingce.autos）</strong>正是为了打破这一乱象而设立。我们不追求做大而全的泛滥导航，而是以工程师的严谨态度，建立一套公开透明、持续追踪、可追溯核验的评测体系。
+        </p>
+
+        <h2 class="text-2xl font-bold text-slate-900">二、我们的三大核心准则</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose my-6">
+          <div class="p-5 rounded-2xl bg-white border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-2 text-sm">1. 数据事实优先</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">明确区分“官方公开宣传”与“实际测试数据”。没有经过实测验证的节点，绝不假借实测名义背书。</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-white border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-2 text-sm">2. 绝不隐瞒缺陷</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">任何评测品牌均清晰罗列缺点与注意事项。不为商业利益而对断流、无试用、价格过高等短板妥协。</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-white border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-2 text-sm">3. 坚持持续追踪</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">代理服务的稳定性是动态变化的。我们建立定期核验机制，对发生重大线路降级或调价的品牌及时同步修正。</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-slate-900">三、技术架构与开源维护</h2>
+        <p>
+          本站由现代化前端静态站点生成框架 Astro 构建，整站完全静态化托管在 Cloudflare 边缘计算全球网络上，具备极高的页面加载性能与抵御网络攻击能力。
+        </p>
+        <p>
+          我们欢迎广大出海开发者、网络运维人员与普通用户共同参与本站内容的监督与勘误。
+        </p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const pageTitle = '免责声明与服务合规提示 | 梯子评测网';
+const pageDescription = '梯子评测网（tizipingce.autos）免责声明。明确法律合规边界、网络安全守则、第三方服务不可抗力风险提示与知识产权声明。';
+
+const breadcrumbs = [
+  { label: '免责声明', href: '/disclaimer/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article class="max-w-prose mx-auto">
+      <header class="mb-10 pb-6 border-b border-slate-200">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          免责声明与法律合规提示
+        </h1>
+        <p class="text-xs text-slate-400">最后生效与修订日期：2026年3月20日</p>
+      </header>
+
+      <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-6">
+        <h2 class="text-xl font-bold text-slate-900">一、法律合规与使用目的声明</h2>
+        <p>
+          本站（tizipingce.autos）所刊载的所有网络代理协议科普、开源客户端（如 Clash、Sing-box、Shadowrocket）配置教程以及网络服务评测，<strong>仅供跨国企业合法商务办公、海外学术科研查阅文献、国际软件开发测试及跨境电子商务交流参考</strong>。
+        </p>
+        <p>
+          任何访问本站的用户必须严格遵守您所在国家或地区的法律法规。<strong>严禁利用相关网络技术从事任何破坏国家安全、侵犯他人隐私、传播违法违规内容或从事网络违法犯罪活动</strong>。对于违反相关法律所造成的一切后果，均由使用者本人独立承担，本站不承担任何直接或连带法律责任。
+        </p>
+
+        <h2 class="text-xl font-bold text-slate-900">二、第三方服务风险与不可抗力提示</h2>
+        <p>
+          出海网络服务具有显著的不确定性，受国际海缆中断、公网防火墙升级、机房政策调整等诸多不可抗力因素影响。
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li>本站所有评测数据基于特定时间、特定网络环境的实测记录，<strong>不代表对该服务未来稳定性的任何永久承诺</strong>；</li>
+          <li>第三方机场服务商属于独立运作的商业主体，若其出现网络中断、套餐降速、甚至违约关站（跑路）等商业纠纷，本站不承担任何赔偿或担保责任；</li>
+          <li>本站强烈提醒广大用户：<strong>坚持按月或按季购买，杜绝大额长期充值，并务必建立多服务商备份通道</strong>。</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-slate-900">三、知识产权声明</h2>
+        <p>
+          本站所有原创文字评测、计算模型与图文排版均属梯子评测网所有，受知识产权法律保护。严禁任何第三方网站未经授权进行无出处抄袭、整站镜像或批量抓取。文中引用的第三方软件商标（如 Windows、Apple、Shadowrocket 等）版权归其各自商标持有人所有。
+        </p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

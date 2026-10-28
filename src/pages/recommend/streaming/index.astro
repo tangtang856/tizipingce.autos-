@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports().filter((a) => (a.streamingSupport?.length ?? 0) >= 3);
+
+const pageTitle = 'Netflix/Disney+/YouTube流媒体解锁机场推荐 | 4K秒开 - 梯子评测网';
+const pageDescription = '2026年适合观看 Netflix、Disney+、YouTube Premium、HBO Max 的流媒体解锁机场推荐。实测 4K 超高清秒开、低缓冲与多地区跨区库解锁表现。';
+
+const breadcrumbs = [
+  { label: '机场推荐', href: '/recommend/budget/' },
+  { label: '流媒体解锁推荐', href: '/recommend/streaming/' },
+];
+
+const faqItems = [
+  {
+    question: '为什么有些节点能看油管 4K，但 Netflix 只能看自制剧（非全区）？',
+    answer: 'Netflix 对 IP 有严格的商业机房与住宅归属检测。如果节点 IP 被 Netflix 识别为托管机房（Hosting），它会屏蔽所有非原创版权剧，只保留 Netflix 拥有全球版权的自制剧。需要机场部署 DNS 解锁或原生 Residential IP 才能观看完整版权库。',
+  },
+  {
+    question: '在电视 TV 端（Apple TV / Android TV）观看流媒体需要注意什么？',
+    answer: '电视端建议在家庭路由器上配置科学上网（通过 Clash 软路由透明网关）或者直接在 Apple TV 上安装 Sing-box / Surge / Shadowrocket TV 版，配合专线节点可实现遥控器秒开 4K HDR 杜比视界。',
+  },
+];
+
+const relatedLinks = [
+  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
+  { title: '机场节点类型全解析', href: '/glossary/node-types/', category: '术语百科' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 mb-3">
+        <span>🎬 4K HDR与杜比视界秒开</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        4K 流媒体超清秒开机场节点选购指南
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        实测各大机场节点对 Netflix（奈飞全区）、Disney+、HBO Max、YouTube 4K60FPS 的解锁与缓冲速度，告别转圈和降画质，打造沉浸式家庭影音体验。
+      </p>
+    </header>
+
+    <section class="mb-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport) => (
+          <AirportCard airport={airport} highlightFeature="4K流媒体秒开" />
+        ))}
+      </div>
+    </section>
+
+    <FaqAccordion items={faqItems} title="流媒体解锁与画质常见答疑" />
+    <RelatedArticles links={relatedLinks} />
+  </div>
+</BaseLayout>

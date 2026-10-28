@@ -1,0 +1,120 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports();
+
+const pageTitle = '机场推荐专题中心 | 按预算与需求精选梯子节点 - 梯子评测网';
+const pageDescription = '梯子评测网机场推荐专题中心。提供低预算平价、高端物理IPLC专线、新手小白一键配置、晚高峰防断连稳定、ChatGPT/Claude AI工具及Netflix 4K流媒体六大核心专题。';
+
+const breadcrumbs = [
+  { label: '机场推荐', href: '/recommend/budget/' },
+];
+
+const pillars = [
+  {
+    title: '低预算平价推荐',
+    slug: 'budget',
+    desc: '月付 10-20 元区间，精打细算的学生党与轻度备用梯子首选。',
+    tag: '10元起步 / 极高性价比',
+    color: 'from-blue-500/10 to-transparent border-blue-200',
+  },
+  {
+    title: '高端物理专线推荐',
+    slug: 'premium',
+    desc: '全企业级 IPLC/IEPL 物理光纤，不经过防火墙公网，商务外贸与会议首选。',
+    tag: '物理专线 / 0丢包',
+    color: 'from-purple-500/10 to-transparent border-purple-200',
+  },
+  {
+    title: '新手入门友好推荐',
+    slug: 'beginner',
+    desc: '全平台一键导入订阅，配套详尽中文图文教程，小白 3 分钟极速出海。',
+    tag: '一键导入 / 零配置门槛',
+    color: 'from-emerald-500/10 to-transparent border-emerald-200',
+  },
+  {
+    title: '高稳定性抗封锁推荐',
+    slug: 'stable',
+    desc: '双活入口与自研 BGP 调度，无视晚高峰网络拥堵与重大敏感时期封锁。',
+    tag: '晚高峰坚挺 / 拒绝掉线',
+    color: 'from-indigo-500/10 to-transparent border-indigo-200',
+  },
+  {
+    title: 'ChatGPT & AI 专用推荐',
+    slug: 'ai',
+    desc: '原生纯净住宅/商用 IP 池，防止 OpenAI 1020 报错与 Claude 封号风险。',
+    tag: '原生IP / 深度防风控',
+    color: 'from-emerald-500/10 to-transparent border-emerald-200',
+  },
+  {
+    title: '4K 流媒体超清解锁推荐',
+    slug: 'streaming',
+    desc: '专线超大带宽，实测 Netflix、Disney+、HBO Max 跨区全库 4K 秒开。',
+    tag: 'Netflix全区 / 4K秒开',
+    color: 'from-rose-500/10 to-transparent border-rose-200',
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-10">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
+        <span>🧭 场景化选购导航</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        机场与梯子场景化推荐专题中心
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        没有最好的机场，只有最适合你使用场景的配置。请根据你的实际预算、设备情况和核心使用诉求选择对应专题深入了解。
+      </p>
+    </header>
+
+    <!-- 6 Thematic Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+      {
+        pillars.map((pillar) => (
+          <a
+            href={`/recommend/${pillar.slug}/`}
+            class={`p-6 rounded-2xl bg-gradient-to-br ${pillar.color} border bg-white hover:shadow-md transition-all group flex flex-col justify-between`}
+          >
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/80 text-slate-700 border border-slate-200 mb-3">
+                {pillar.tag}
+              </span>
+              <h2 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-2">
+                {pillar.title}
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{pillar.desc}</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-brand-600 group-hover:translate-x-1 transition-transform">
+              <span>查看专题推荐清单</span>
+              <span>→</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- All Verified Brands Section -->
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">已核验品牌完整卡片列表</h2>
+          <p class="text-xs text-slate-500 mt-1">包含所有已纳入本站数据库的品牌，按评分排序</p>
+        </div>
+        <a href="/ranking/overall/" class="text-xs font-semibold text-brand-600 hover:underline">查看排名总表 →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport, idx) => (
+          <AirportCard airport={airport} rankBadge={idx + 1} />
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

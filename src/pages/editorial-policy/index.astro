@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const pageTitle = '编辑政策与评测准则 | 梯子评测网';
+const pageDescription = '梯子评测网（tizipingce.autos）编辑政策、数据核验标准、评分算法规则与商业合作关系透明度披露。';
+
+const breadcrumbs = [
+  { label: '编辑政策', href: '/editorial-policy/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article class="max-w-prose mx-auto">
+      <header class="mb-10 pb-6 border-b border-slate-200">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          编辑政策、数据核验与评测标准
+        </h1>
+        <p class="text-base text-slate-600 leading-relaxed">
+          公开、透明、负责任的内容创作原则是我们维持读者信任的唯一基石。
+        </p>
+      </header>
+
+      <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-6">
+        <h2 class="text-2xl font-bold text-slate-900">一、信息采集与数据分类标准</h2>
+        <p>
+          为了杜绝信息误导，本站所有涉及机场品牌、套餐与线路的文章与数据库字段严格划分为以下四类：
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>官方公开资料 (Official Data)：</strong>直接采集自服务商官方主页、服务条款或官方频道公开发布的定价、流量额度与协议类型；</li>
+          <li><strong>实际测试结果 (Tested Data)：</strong>由编辑团队使用实体设备，在不同运营商（电信/联通/移动）宽带下，通过 Traceroute 路由跟踪、全天候丢包测试及真实 4K 播放取得的抓包数据；</li>
+          <li><strong>编辑整理分析 (Editorial Analysis)：</strong>结合节点参数与市场横向对比得出的适用人群与优缺点结论；</li>
+          <li><strong>尚未核实资料 (Unverified)：</strong>对于无法从官方获取权威参数或尚未经过实测的技术点，页面一律明确标注“尚未核实”，绝不随意脑补。</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-slate-900">二、排行榜计算规则与独立性</h2>
+        <p>
+          我们的排行榜（综合榜、性价比榜、低预算榜、专线稳定榜）基于程序算法与量化指标生成：
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>性价比榜单：</strong>严谨执行真实有效流量折算公式，剔除 3x/5x 虚高倍率套路，未核实验证的套餐不参与自动排序；</li>
+          <li><strong>稳定榜单：</strong>物理专线（IPLC/IEPL）优先于公网中转，结合晚高峰 20:00-23:00 丢包率加权；</li>
+          <li><strong>独立性承诺：</strong>本站**不接受任何出价改变排名的赞助要求**。任何试图通过付费掩盖服务掉线、断流缺陷的商业合作均会被断然拒绝。</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-slate-900">三、商业模式与联盟推广声明 (Affiliate Disclosure)</h2>
+        <p>
+          为了维持服务器运行、物理宽带测试环境以及评测人员的持续投入，本站部分外部购买链接采用了合规的推广联盟链接（Affiliate Links）。
+        </p>
+        <p>
+          这意味着：如果您通过本站链接注册并购买了服务，服务商可能会支付给我们小比例的推广佣金。<strong>这不会增加您的任何购买成本，有时甚至能通过专属优惠码为您争取额外折扣。</strong>我们的评测意见与评分完全独立于推广佣金高低。
+        </p>
+
+        <h2 class="text-2xl font-bold text-slate-900">四、勘误与持续修正机制</h2>
+        <p>
+          当机场服务商调整套餐价格、变更线路骨干或被证实跑路时，我们承诺在收到反馈核实后的 48 小时内更新页面数据或下架推荐。欢迎读者通过本站公开的勘误渠道提交线索。
+        </p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

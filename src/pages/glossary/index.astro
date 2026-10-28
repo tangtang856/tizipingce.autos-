@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const terms = await getCollection('glossary');
+terms.sort((a, b) => a.data.term.localeCompare(b.data.term));
+
+const pageTitle = '网络代理与机场专业术语百科中心 | 梯子评测网';
+const pageDescription = '梯子评测网术语百科知识库。全面收录 IPLC/IEPL 专线、BGP 入口、Shadowsocks/Trojan/Hysteria 协议、深度包检测(DPI)及订阅转换等核心网络概念科普。';
+
+const breadcrumbs = [
+  { label: '术语百科', href: '/glossary/node-types/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-10">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
+        <span>📚 专业词条库</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        网络代理与出海技术术语百科
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        由浅入深解析跨境网络技术底层概念。无论是刚接触科学上网的小白，还是希望深入研究路由拓扑的极客，都能在此找到严谨、通俗的词条解释。
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+      {
+        terms.map((t) => {
+          const slug = t.id.replace(/\.(md|mdx)$/, '');
+          return (
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:shadow-md transition-shadow group">
+              <div>
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600 mb-2 inline-block">
+                  {t.data.category}
+                </span>
+                <h2 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-2">
+                  <a href={`/glossary/${slug}/`}>{t.data.term}</a>
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                  {t.data.description}
+                </p>
+              </div>
+              <a
+                href={`/glossary/${slug}/`}
+                class="text-xs font-semibold text-brand-600 group-hover:underline flex items-center gap-1 pt-3 border-t border-slate-100"
+              >
+                阅读完整科普词条 →
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</BaseLayout>

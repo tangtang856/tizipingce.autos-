@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import RankingTable from '@/components/RankingTable.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import { getRankedAirports } from '@/data/airports';
+
+const airports = getRankedAirports('budget');
+
+const pageTitle = '2026平价低预算机场排行榜 | 10-20元梯子节点横评 - 梯子评测网';
+const pageDescription = '2026年平价低预算机场排行榜。专为学生党、轻度查资料与备用梯子需求者整理，精选月付 10-20 元左右的高可用平价机场，杜绝劣质三无跑路站。';
+
+const breadcrumbs = [
+  { label: '机场排行', href: '/ranking/overall/' },
+  { label: '低预算排行', href: '/ranking/budget/' },
+];
+
+const faqItems = [
+  {
+    question: '低预算机场通常会在哪些方面缩减成本？',
+    answer: '低预算机场主要采用公网中转隧道或直连 VPS 节点，而非昂贵的中港/沪日物理 IPLC 专线；同时客服大多为工单异步回复，在敏感时期可能出现短时拥堵或丢包升高。',
+  },
+  {
+    question: '平价机场适合拿来打游戏或做重要外贸办公吗？',
+    answer: '不建议。外贸收发敏感邮件、境外资金支付以及国际游戏联机对网络抖动和 IP 纯净度极其敏感，建议选择高端专线机场。低预算机场更适合刷推特、查文献、日常网页浏览或备用防失联。',
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-10">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
+        <span>🏷️ 亲民低门槛推荐</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        2026 平价低预算机场与梯子排行榜
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        为学生党、轻度科研查阅文献与备用出海通道打造。收录起步门槛在 10 至 20 元区间的低预算实用机场，平衡低廉花费与基本连通可用率。
+      </p>
+    </header>
+
+    <section class="mb-14">
+      <RankingTable airports={airports} />
+    </section>
+
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">低预算推荐品牌解析</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport, index) => (
+          <AirportCard airport={airport} rankBadge={index + 1} />
+        ))}
+      </div>
+    </section>
+
+    <FaqAccordion items={faqItems} title="低预算机场使用注意事项" />
+  </div>
+</BaseLayout>

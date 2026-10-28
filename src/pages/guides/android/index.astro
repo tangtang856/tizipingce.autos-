@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getEntry, render } from 'astro:content';
+
+const guide = await getEntry('guides', 'android');
+if (!guide) throw new Error('Guide android not found');
+const { Content } = await render(guide);
+
+const pageTitle = `${guide.data.title} | 梯子评测网`;
+const pageDescription = guide.data.description;
+
+const breadcrumbs = [
+  { label: '使用教程', href: '/guides/windows/' },
+  { label: 'Android客户端指南', href: '/guides/android/' },
+];
+
+const relatedLinks = [
+  { title: 'Windows电脑配置教程', href: '/guides/windows/', category: '客户端教程' },
+  { title: 'iOS苹果手机小火箭配置教程', href: '/guides/ios/', category: '客户端教程' },
+  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
+];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: guide.data.title,
+  description: guide.data.description,
+  datePublished: guide.data.pubDate.toISOString(),
+  dateModified: guide.data.updatedDate?.toISOString() || guide.data.pubDate.toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: '梯子评测网编辑团队',
+  },
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="article" schema={articleSchema}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <article class="max-w-prose mx-auto">
+      <header class="mb-8 pb-6 border-b border-slate-200">
+        <div class="flex items-center gap-3 text-xs text-slate-500 mb-3">
+          <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-medium">Android 客户端</span>
+          <span>难度：{guide.data.difficulty}</span>
+          <span>预计阅读：{guide.data.readingTime}</span>
+          <span>更新于：{guide.data.updatedDate?.toISOString().slice(0, 10)}</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          {guide.data.title}
+        </h1>
+      </header>
+
+      <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-5">
+        <Content />
+      </div>
+
+      <RelatedArticles links={relatedLinks} />
+    </article>
+  </div>
+</BaseLayout>

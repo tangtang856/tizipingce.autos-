@@ -1,0 +1,120 @@
+---
+import type { Airport } from '../data/airports';
+
+interface Props {
+  airports: Airport[];
+  showUnitPrice?: boolean;
+}
+
+const { airports, showUnitPrice = false } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+  <table class="w-full text-left border-collapse text-sm">
+    <thead>
+      <tr class="bg-slate-50/80 border-b border-slate-200 text-xs text-slate-500 font-semibold uppercase tracking-wider">
+        <th class="py-3.5 px-4 text-center w-14">排名</th>
+        <th class="py-3.5 px-4 min-w-[180px]">品牌与架构</th>
+        <th class="py-3.5 px-4 min-w-[110px]">起步价格</th>
+        <th class="py-3.5 px-4 min-w-[140px]">{showUnitPrice ? '单价/GB' : '套餐流量'}</th>
+        <th class="py-3.5 px-4 min-w-[160px]">线路类型</th>
+        <th class="py-3.5 px-4 min-w-[180px]">最佳适用场景</th>
+        <th class="py-3.5 px-4 text-right min-w-[130px]">操作</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-100">
+      {
+        airports.map((airport, index) => {
+          const rank = index + 1;
+          const lowestPlan = airport.plans[0];
+          const minPricePerGb = Math.min(...airport.plans.map((p) => p.price / p.trafficGB)).toFixed(3);
+
+          return (
+            <tr class="hover:bg-slate-50/60 transition-colors">
+              <!-- Rank -->
+              <td class="py-4 px-4 text-center">
+                <span class:list={[
+                  'inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold',
+                  rank === 1
+                    ? 'bg-amber-400 text-slate-900 shadow-sm'
+                    : rank === 2
+                    ? 'bg-slate-200 text-slate-800'
+                    : rank === 3
+                    ? 'bg-amber-700 text-white'
+                    : 'bg-slate-100 text-slate-500',
+                ]}>
+                  {rank}
+                </span>
+              </td>
+
+              <!-- Brand -->
+              <td class="py-4 px-4">
+                <div class="font-bold text-slate-900">
+                  <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600 transition-colors">
+                    {airport.name}
+                  </a>
+                </div>
+                <div class="text-xs text-slate-500 line-clamp-1">{airport.protocols.join(', ')}</div>
+              </td>
+
+              <!-- Price -->
+              <td class="py-4 px-4">
+                <div class="font-bold text-slate-900">¥{airport.startingPrice} <span class="text-xs font-normal text-slate-500">/月起</span></div>
+                <div class="text-[11px] text-slate-400">{lowestPlan?.name}</div>
+              </td>
+
+              <!-- Traffic / Unit Price -->
+              <td class="py-4 px-4">
+                {showUnitPrice ? (
+                  <div>
+                    <span class="font-bold text-brand-600">约 ¥{minPricePerGb}</span>
+                    <span class="text-xs text-slate-400 block">每 GB 综合成本</span>
+                  </div>
+                ) : (
+                  <div>
+                    <span class="font-semibold text-slate-800">{lowestPlan?.trafficGB ?? '详见套餐'} GB</span>
+                    <span class="text-xs text-slate-400 block">基础月度配额</span>
+                  </div>
+                )}
+              </td>
+
+              <!-- Line Type -->
+              <td class="py-4 px-4">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                  {airport.lineType}
+                </span>
+              </td>
+
+              <!-- Suitable For -->
+              <td class="py-4 px-4 text-xs text-slate-600">
+                {airport.suitableFor[0] || '日常科学上网'}
+              </td>
+
+              <!-- Actions -->
+              <td class="py-4 px-4 text-right whitespace-nowrap">
+                <div class="flex items-center justify-end gap-1.5">
+                  <a
+                    href={`/review/${airport.slug}/`}
+                    class="px-2.5 py-1.5 text-xs font-medium text-brand-700 bg-brand-50 hover:bg-brand-100 rounded-md transition-colors"
+                  >
+                    评测
+                  </a>
+                  {airport.affiliateUrl && (
+                    <a
+                      href={airport.affiliateUrl}
+                      target="_blank"
+                      rel="nofollow noopener noreferrer"
+                      class="px-2.5 py-1.5 text-xs font-medium text-white bg-brand-600 hover:bg-brand-700 rounded-md transition-colors shadow-sm"
+                    >
+                      直达
+                    </a>
+                  )}
+                </div>
+              </td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+</div>

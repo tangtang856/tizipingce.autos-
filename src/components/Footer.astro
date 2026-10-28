@@ -1,0 +1,133 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-slate-800">
+      <!-- Col 1: Brand Info -->
+      <div class="lg:col-span-2 space-y-4">
+        <a href="/" class="flex items-center gap-2 group inline-flex" aria-label="梯子评测网首页">
+          <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-base shadow">
+            梯
+          </div>
+          <div class="flex flex-col">
+            <span class="text-lg font-bold text-white tracking-tight">梯子评测网</span>
+            <span class="text-xs text-slate-400 font-mono">tizipingce.autos</span>
+          </div>
+        </a>
+        <p class="text-sm text-slate-400 leading-relaxed pr-4">
+          梯子评测网（tizipingce.autos）是一家专注于网络出海技术、主流机场节点、高性价比梯子及全平台科学上网客户端配置的独立第三方技术评测站点。坚持数据实测、客观陈述、拒绝虚假跑分。
+        </p>
+        <div class="pt-2 text-xs text-slate-500 flex flex-wrap gap-2">
+          <span class="inline-flex items-center px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">
+            ✓ 真实数据核验
+          </span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">
+            ✓ 晚高峰抗封锁实测
+          </span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">
+            ✓ 拒绝虚假宣传
+          </span>
+        </div>
+      </div>
+
+      <!-- Col 2: 核心专题 -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-4">核心专题推荐</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li>
+            <a href="/recommend/budget/" class="text-slate-400 hover:text-white transition-colors">平价低预算机场推荐</a>
+          </li>
+          <li>
+            <a href="/recommend/premium/" class="text-slate-400 hover:text-white transition-colors">高端IPLC专线机场</a>
+          </li>
+          <li>
+            <a href="/recommend/beginner/" class="text-slate-400 hover:text-white transition-colors">新手入门友好机场</a>
+          </li>
+          <li>
+            <a href="/recommend/stable/" class="text-slate-400 hover:text-white transition-colors">晚高峰高稳定性机场</a>
+          </li>
+          <li>
+            <a href="/recommend/ai/" class="text-slate-400 hover:text-white transition-colors">ChatGPT / Claude 解锁</a>
+          </li>
+          <li>
+            <a href="/recommend/streaming/" class="text-slate-400 hover:text-white transition-colors">Netflix / Disney+ 流媒体</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 3: 排行与工具 -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-4">排行榜与工具</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li>
+            <a href="/ranking/overall/" class="text-slate-400 hover:text-white transition-colors">2026综合排行榜</a>
+          </li>
+          <li>
+            <a href="/ranking/value/" class="text-slate-400 hover:text-white transition-colors">高性价比梯子排行榜</a>
+          </li>
+          <li>
+            <a href="/ranking/budget/" class="text-slate-400 hover:text-white transition-colors">平价低预算排行榜</a>
+          </li>
+          <li>
+            <a href="/ranking/stable/" class="text-slate-400 hover:text-white transition-colors">网络稳定性排行榜</a>
+          </li>
+          <li>
+            <a href="/compare/" class="text-slate-400 hover:text-white transition-colors">机场参数横向对比工具</a>
+          </li>
+          <li>
+            <a href="/glossary/node-types/" class="text-slate-400 hover:text-white transition-colors">机场节点类型全解析</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 4: 信任与合规 -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-4">关于与合规</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li>
+            <a href="/about/" class="text-slate-400 hover:text-white transition-colors">关于本站</a>
+          </li>
+          <li>
+            <a href="/editorial-policy/" class="text-slate-400 hover:text-white transition-colors">编辑政策与评测标准</a>
+          </li>
+          <li>
+            <a href="/contact/" class="text-slate-400 hover:text-white transition-colors">联系我们与商务勘误</a>
+          </li>
+          <li>
+            <a href="/privacy-policy/" class="text-slate-400 hover:text-white transition-colors">隐私政策</a>
+          </li>
+          <li>
+            <a href="/disclaimer/" class="text-slate-400 hover:text-white transition-colors">免责声明与合规提醒</a>
+          </li>
+          <li>
+            <a href="/sitemap-index.xml" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors">网站地图 (Sitemap)</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Disclosure & Bottom Row -->
+    <div class="pt-8 text-xs text-slate-500 space-y-4">
+      <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-800">
+        <p class="leading-relaxed">
+          <strong>联盟推广与独立性说明：</strong>本站部分外部跳转链接可能包含推广标识（Affiliate Links）。如果您通过本站推荐购买服务，我们可能会收到少量推广佣金，该机制有助于支持本站持续进行线路服务器租赁与带宽测速维护。我们的评测基于客观公开信息与实际测试数据，不接受任何付费更改排名或掩盖服务缺陷的赞助请求。请遵守您所在国家或地区的法律法规，所有代理技术内容仅供外贸商务、海外学术科研及软件技术测试参考。
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+        <p>© {currentYear} 梯子评测网 tizipingce.autos. 保留所有权利。</p>
+        <div class="flex items-center space-x-4">
+          <a href="/privacy-policy/" class="hover:underline">隐私条款</a>
+          <span>•</span>
+          <a href="/disclaimer/" class="hover:underline">免责声明</a>
+          <span>•</span>
+          <a href="/editorial-policy/" class="hover:underline">评测准则</a>
+          <span>•</span>
+          <a href="/sitemap-index.xml" class="hover:underline">Sitemap XML</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

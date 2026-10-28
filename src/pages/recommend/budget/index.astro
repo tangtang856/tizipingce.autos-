@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports().filter((a) => (a.startingPrice ?? 99) <= 20);
+
+const pageTitle = '便宜好用的低预算机场推荐 | 学生党与轻度用户首选 - 梯子评测网';
+const pageDescription = '精选月付 10-20 元左右的高性价比低预算机场梯子。详细拆解平价机场的套餐流量、中继线路架构、防跑路避坑指南及备用节点配置策略。';
+
+const breadcrumbs = [
+  { label: '机场推荐', href: '/recommend/budget/' },
+  { label: '低预算平价推荐', href: '/recommend/budget/' },
+];
+
+const faqItems = [
+  {
+    question: '低预算机场容易跑路吗？如何防范？',
+    answer: '低预算机场因利润空间小，确实存在较高的跑路风险。防范核心原则是：绝不贪图折扣购买年付，坚持月付或季付；同时保留至少两个不同服务商的平价节点作为互备。',
+  },
+  {
+    question: '月付 10 元左右的梯子能看 4K 视频吗？',
+    answer: '在非高峰时段（如白天或深夜），多数质量合格的中转机场均可流畅播放 4K 视频；但在晚高峰（20:00-22:30），公网入口拥堵可能导致 4K 缓冲，建议自动降至 1080P 或选择更高等级的专线节点。',
+  },
+];
+
+const relatedLinks = [
+  { title: '2026高性价比机场排行榜', href: '/ranking/value/', category: '排行榜' },
+  { title: '如何挑选适合自己的机场梯子？避坑指南', href: '/blog/how-to-choose-airport/', category: '选购指南' },
+  { title: '机场节点类型全解析：IPLC与BGP的区别', href: '/glossary/node-types/', category: '术语百科' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
+        <span>💡 专题选购推荐</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        低预算平价机场与备用梯子推荐
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        面对琳琅满目的网络服务，预算有限并不意味着必须忍受龟速和频繁断流。本专题精选月付 10 至 20 元区间、经受过基础稳定性检验的平价机场，适合学生党、轻度网页查阅以及作为主力梯子的安全备用方案。
+      </p>
+    </header>
+
+    <!-- Content Cards -->
+    <section class="mb-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport) => (
+          <AirportCard airport={airport} highlightFeature="高性价比平价" />
+        ))}
+      </div>
+    </section>
+
+    <!-- Buying advice -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-12 text-sm text-slate-700 space-y-4">
+      <h2 class="text-lg font-bold text-slate-900">低预算机场选购三大黄金法则</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <div class="font-bold text-slate-900 mb-1">1. 严禁首次直接年付</div>
+          <p class="text-xs text-slate-500">平价机场由于成本控制紧绷，抵抗封锁能力较弱。坚持月付哪怕贵 2 元，也能将潜在跑路损失降至最低。</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <div class="font-bold text-slate-900 mb-1">2. 警惕“永久免费/1元不限流”</div>
+          <p class="text-xs text-slate-500">服务器机房带宽具有固定的硬成本，任何违反商业常识的极端低价必然伴随着窃取用户隐私、出售访问日志或恶意超售。</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <div class="font-bold text-slate-900 mb-1">3. 务必建立双机场备份</div>
+          <p class="text-xs text-slate-500">配置两个不同服务商的平价订阅，在客户端中设置自动容灾切换（URL-Test），体验不输单一大牌专线。</p>
+        </div>
+      </div>
+    </section>
+
+    <FaqAccordion items={faqItems} title="低预算机场选购常见疑问" />
+    <RelatedArticles links={relatedLinks} />
+  </div>
+</BaseLayout>

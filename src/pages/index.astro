@@ -1,0 +1,412 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import RankingTable from '@/components/RankingTable.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import { getAllAirports, getRankedAirports } from '@/data/airports';
+import { getCollection } from 'astro:content';
+
+const allAirports = getAllAirports();
+const topAirports = getRankedAirports('overall');
+const featuredAirports = allAirports.slice(0, 4);
+
+// Blog & Guides & Glossary previews
+const recentBlog = (await getCollection('blog')).slice(0, 3);
+const recentGlossary = (await getCollection('glossary')).slice(0, 4);
+
+const pageTitle = '2026机场推荐与梯子选购指南 | 优质VPN节点与高性价比机场评测 - 梯子评测网';
+const pageDescription = '梯子评测网（tizipingce.autos）为您提供2026最新高性价比机场推荐与梯子选购指南。基于真实晚高峰测速、物理IPLC专线丢包率、海外流媒体与ChatGPT解锁进行深度评测，助您告别断连与虚假跑分。';
+
+const homepageFaq = [
+  {
+    question: '2026年挑选机场推荐或梯子节点时，最核心看哪些指标？',
+    answer: '建议依次看重四点：1. 骨干线路类型（优先选物理 IPLC/IEPL 内网专线或优质 BGP 中继，远离廉价公网直连）；2. 晚高峰 20:00-23:00 丢包率与抖动；3. 原生 IP 解锁能力（能否顺畅使用 ChatGPT 与 Netflix 4K）；4. 运营年限（优先选择稳定运营 2 年以上、支持单月月付的品牌）。',
+  },
+  {
+    question: '为什么不推荐直接购买海外传统商业 VPN（如 ExpressVPN）？',
+    answer: '传统商用 VPN 多采用 OpenVPN 或 WireGuard 协议，其数据包特征极其明显，极易被防火长城（GFW）的深度包检测（DPI）识别并阻断端口，在中国大陆境内往往连接困难且晚高峰速度极慢。专为抗审查设计的专线机场节点体验更为流畅。',
+  },
+  {
+    question: '低预算性价比机场（月付 10-15 元）适合日常主力使用吗？',
+    answer: '对于以网页查资料、学生文献阅读及轻度流媒体浏览为主的用户，优质的平价中继机场完全足够；但如果您有外贸跨国会议、远程企业办公或游戏联机需求，建议选择具备 99% SLA 保障的高端专线梯子。',
+  },
+  {
+    question: '购买机场梯子后，可以在哪些设备上使用？',
+    answer: '现代机场支持全平台通用订阅。Windows 推荐使用 Clash Verge Rev；Android 推荐 Clash Meta 或 Surfboard；iOS 推荐 Shadowrocket（小火箭）；macOS 推荐 Clash Verge 或 Surge；电视端支持 Apple TV 与软路由旁路由透明网关。',
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Section 2: Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-surface-50 to-surface-50 pt-12 pb-16 border-b border-slate-200">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <!-- Trust badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white border border-brand-200 text-brand-700 shadow-sm mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>2026 最新核验数据 · 晚高峰实测驱动</span>
+        </div>
+
+        <!-- Single Unique H1 -->
+        <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+          2026年稳定优质<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 to-brand-500">机场推荐</span>与梯子评测指南
+        </h1>
+
+        <!-- Direct Answer / Needs Fulfillment -->
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
+          告别花哨测速跑分与野鸡机场跑路陷阱。我们为您持续跟踪主流<strong>性价比机场、IPLC 专线梯子与 VPN 节点</strong>的真实晚高峰丢包率、流媒体 4K 播放与 ChatGPT 解锁表现，让出海选择更加省心可靠。
+        </p>
+
+        <!-- Main Entrances / CTAs -->
+        <div class="flex flex-wrap items-center justify-center gap-3.5 mb-8">
+          <a
+            href="/ranking/overall/"
+            class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md shadow-brand-500/20 transition-all"
+          >
+            🏆 查看2026综合排行榜
+          </a>
+          <a
+            href="/ranking/value/"
+            class="px-6 py-3 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-semibold text-sm shadow-sm transition-all"
+          >
+            💰 高性价比机场排行
+          </a>
+          <a
+            href="/compare/"
+            class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all"
+          >
+            ⚡ 在线横向对比工具
+          </a>
+        </div>
+
+        <!-- Quick Spec highlights -->
+        <div class="flex items-center justify-center gap-6 text-xs text-slate-500">
+          <span class="flex items-center gap-1">✓ 真实数据溯源</span>
+          <span class="flex items-center gap-1">✓ 拒绝商业排名赞助</span>
+          <span class="flex items-center gap-1">✓ 全平台客户端图文教程</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: 快速答案 (Quick Answers) -->
+  <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 -mt-6">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 sm:p-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-sm">💡</span>
+        <h2 class="text-lg font-bold text-slate-900">出海选购速查：30 秒找准适合你的机场节点</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <h3 class="font-bold text-slate-900 mb-1">新手小白如何选？</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            选择提供全平台“一键导入订阅”的品牌，先买月付（15-20元档），配合本站新手教程 3 分钟即可配置完毕。
+          </p>
+          <a href="/recommend/beginner/" class="inline-block mt-2 font-semibold text-brand-600 text-xs hover:underline">新手专区 →</a>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <h3 class="font-bold text-slate-900 mb-1">哪些指标最关键？</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            物理专线（IPLC）优于公网中转；全天丢包率低于 1% 优于单纯的并发测速峰值；原生 IP 解锁决定了 AI 和流媒体体验。
+          </p>
+          <a href="/glossary/node-types/" class="inline-block mt-2 font-semibold text-brand-600 text-xs hover:underline">节点科普 →</a>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <h3 class="font-bold text-slate-900 mb-1">如何判断是否划算？</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            查看“每 GB 折算单价”并警惕高倍率陷阱（标称 500G 但全为 3x 倍率等于虚标）。真正高性价比应在 0.1-0.2 元/GB 左右。
+          </p>
+          <a href="/ranking/value/" class="inline-block mt-2 font-semibold text-brand-600 text-xs hover:underline">单价测算榜 →</a>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <h3 class="font-bold text-slate-900 mb-1">购买前必须检查什么？</h3>
+          <p class="text-slate-600 text-xs leading-relaxed">
+            严禁盲目购买大额年付！坚持月付尝鲜，检查服务商运营时间是否超 1-2 年，并保留第二家平价机场作为故障互备。
+          </p>
+          <a href="/blog/how-to-choose-airport/" class="inline-block mt-2 font-semibold text-brand-600 text-xs hover:underline">避坑指南 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: 精选推荐卡片 (Featured Airport Cards) -->
+  <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div>
+        <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">EDITORIAL PICKS</div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          编辑部精选优质机场节点推荐
+        </h2>
+        <p class="text-sm text-slate-500 mt-1">涵盖高性价比、高端专线、冷门地区与商用调度代表品牌</p>
+      </div>
+      <a href="/recommend/" class="text-xs sm:text-sm font-semibold text-brand-600 hover:underline shrink-0">
+        查看全部场景专题推荐 →
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {featuredAirports.map((airport, idx) => (
+        <AirportCard airport={airport} rankBadge={idx + 1} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 5: 综合排行榜预览 (Comprehensive Ranking) -->
+  <section class="bg-white py-16 border-y border-slate-200">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">RANKING OVERVIEW</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            2026 全网优质机场梯子综合排名总表
+          </h2>
+          <p class="text-sm text-slate-500 mt-1">基于线路骨干、晚高峰稳定性、流媒体解锁与运营年限的综合评分榜</p>
+        </div>
+        <a href="/ranking/overall/" class="text-xs sm:text-sm font-semibold text-brand-600 hover:underline shrink-0">
+          查看完整排行榜及评分细则 →
+        </a>
+      </div>
+
+      <RankingTable airports={topAirports} />
+    </div>
+  </section>
+
+  <!-- Section 6: 按需求选择 (6 Thematic Entrances) -->
+  <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">FIND BY CATEGORY</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        按使用场景与核心需求精准挑选
+      </h2>
+      <p class="text-sm text-slate-500">不同用户群体的侧重点各不相同，我们设立了 6 大独立深度专题供你细分对比</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <a href="/recommend/budget/" class="p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg mb-4">💰</div>
+        <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1">低预算平价推荐</h3>
+        <p class="text-xs text-slate-500 leading-relaxed mb-4">月付 10-20 元左右，精打细算的学生党与轻度备用梯子节点首选。</p>
+        <span class="text-xs font-semibold text-brand-600 group-hover:translate-x-1 inline-flex items-center transition-transform">进入专题 →</span>
+      </a>
+
+      <a href="/recommend/premium/" class="p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-lg mb-4">⚡</div>
+        <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1">高端物理专线推荐</h3>
+        <p class="text-xs text-slate-500 leading-relaxed mb-4">采用企业级 IPLC/IEPL 物理专线，完全不过 GFW 审查墙，商务办公 0 丢包。</p>
+        <span class="text-xs font-semibold text-brand-600 group-hover:translate-x-1 inline-flex items-center transition-transform">进入专题 →</span>
+      </a>
+
+      <a href="/recommend/beginner/" class="p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-4">🌱</div>
+        <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1">新手入门友好推荐</h3>
+        <p class="text-xs text-slate-500 leading-relaxed mb-4">全平台一键导入，界面直观，配套保姆级图文教程，小白 3 分钟快速出海。</p>
+        <span class="text-xs font-semibold text-brand-600 group-hover:translate-x-1 inline-flex items-center transition-transform">进入专题 →</span>
+      </a>
+
+      <a href="/recommend/stable/" class="p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg mb-4">🛡️</div>
+        <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1">高稳定性抗封锁推荐</h3>
+        <p class="text-xs text-slate-500 leading-relaxed mb-4">多活 BGP 入口与自研容灾调度，晚高峰 20:00-23:00 告别卡顿与断流。</p>
+        <span class="text-xs font-semibold text-brand-600 group-hover:translate-x-1 inline-flex items-center transition-transform">进入专题 →</span>
+      </a>
+
+      <a href="/recommend/ai/" class="p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-4">🤖</div>
+        <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1">ChatGPT / AI 工具专区</h3>
+        <p class="text-xs text-slate-500 leading-relaxed mb-4">高纯净度原生 IP 节点，杜绝 OpenAI 1020 报错与 Claude 封号风险。</p>
+        <span class="text-xs font-semibold text-brand-600 group-hover:translate-x-1 inline-flex items-center transition-transform">进入专题 →</span>
+      </a>
+
+      <a href="/recommend/streaming/" class="p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-md transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-lg mb-4">🎬</div>
+        <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1">4K 流媒体超清解锁</h3>
+        <p class="text-xs text-slate-500 leading-relaxed mb-4">超大带宽保障，解锁 Netflix 全区片库、Disney+ 及 YouTube 4K60FPS 秒开。</p>
+        <span class="text-xs font-semibold text-brand-600 group-hover:translate-x-1 inline-flex items-center transition-transform">进入专题 →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Section 7: 机场横向比较工具入口 (Compare Tool CTA) -->
+  <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-900 to-brand-950 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+      <div class="max-w-xl">
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-brand-500/20 text-brand-300 border border-brand-500/30 mb-3">
+          ⚡ 交互式数据比对
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">在两家或多家机场之间犹豫不决？</h2>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          使用我们的在线横向对比工具，自主勾选 2 至 4 家品牌，在同一屏幕上全方位比对套餐价格、真实每 GB 成本、专线线路、协议及解锁支持。
+        </p>
+      </div>
+      <a
+        href="/compare/"
+        class="px-8 py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm shadow-lg shadow-brand-500/30 transition-all shrink-0"
+      >
+        立即进入横向对比工具 →
+      </a>
+    </div>
+  </section>
+
+  <!-- Section 8: 最新深度独立评测 (Latest Reviews) -->
+  <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">IN-DEPTH REVIEWS</div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">最新深度独立评测报告</h2>
+      </div>
+      <a href="/review/" class="text-xs sm:text-sm font-semibold text-brand-600 hover:underline">查看所有评测 →</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        allAirports.slice(0, 3).map((a) => (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:shadow-md transition-shadow group">
+            <div>
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <span>{a.testStatus === 'tested' ? '✓ 实测验证' : '官方核验'}</span>
+                <span class="font-bold text-brand-600">{a.ratingScore} / 10 分</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-2">
+                <a href={`/review/${a.slug}/`}>{a.name} 实测报告</a>
+              </h3>
+              <p class="text-xs text-slate-500 line-clamp-2 mb-4 leading-relaxed">{a.tagline}</p>
+            </div>
+            <a
+              href={`/review/${a.slug}/`}
+              class="w-full text-center py-2 px-3 rounded-lg text-xs font-semibold bg-brand-50 text-brand-700 hover:bg-brand-100 transition-colors border border-brand-200 block"
+            >
+              阅读深度评测 →
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Section 9: 教程中心 (Guides Showcase) -->
+  <section class="bg-slate-100/60 py-16 border-t border-slate-200">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">SETUP GUIDES</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">全平台科学上网客户端使用教程</h2>
+        </div>
+        <a href="/guides/windows/" class="text-xs sm:text-sm font-semibold text-brand-600 hover:underline">所有教程 →</a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="/guides/windows/" class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-sm transition-all group">
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 mb-2 inline-block">Windows PC</span>
+          <h3 class="font-bold text-slate-900 text-sm group-hover:text-brand-600 mb-1">Clash Verge Rev 电脑配置教程</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">一键导入订阅与系统代理设置详解。</p>
+        </a>
+
+        <a href="/guides/android/" class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-sm transition-all group">
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 mb-2 inline-block">Android 安卓</span>
+          <h3 class="font-bold text-slate-900 text-sm group-hover:text-brand-600 mb-1">Clash Meta 安卓手机配置教程</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">包含后台防杀进程与耗电保活优化。</p>
+        </a>
+
+        <a href="/guides/ios/" class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-sm transition-all group">
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-purple-50 text-purple-700 mb-2 inline-block">iOS 苹果手机</span>
+          <h3 class="font-bold text-slate-900 text-sm group-hover:text-brand-600 mb-1">Shadowrocket 小火箭使用指南</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">美区账号获取与订阅扫码导入步骤。</p>
+        </a>
+
+        <a href="/guides/macos/" class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-sm transition-all group">
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 mb-2 inline-block">macOS 苹果电脑</span>
+          <h3 class="font-bold text-slate-900 text-sm group-hover:text-brand-600 mb-1">Mac 电脑客户端与终端代理</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">适配 M 系列与 Intel 芯片原生运行。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10 & 11: 知识百科与最新文章 (Glossary & Blog Grid) -->
+  <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <!-- Left: Glossary -->
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-0.5">GLOSSARY</div>
+            <h2 class="text-xl font-bold text-slate-900">核心网络术语百科</h2>
+          </div>
+          <a href="/glossary/node-types/" class="text-xs font-semibold text-brand-600 hover:underline">查看全部词条 →</a>
+        </div>
+
+        <div class="space-y-3">
+          {
+            recentGlossary.map((g) => {
+              const slug = g.id.replace(/\.(md|mdx)$/, '');
+              return (
+                <a
+                  href={`/glossary/${slug}/`}
+                  class="block p-4 rounded-xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-sm transition-all group"
+                >
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600 mb-1 inline-block">
+                    {g.data.category}
+                  </span>
+                  <h3 class="text-sm font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+                    {g.data.term}
+                  </h3>
+                  <p class="text-xs text-slate-500 mt-1 line-clamp-1">{g.data.description}</p>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <!-- Right: Recent Blog Posts -->
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-0.5">LATEST INSIGHTS</div>
+            <h2 class="text-xl font-bold text-slate-900">最新深度博客文章</h2>
+          </div>
+          <a href="/blog/" class="text-xs font-semibold text-brand-600 hover:underline">查看所有文章 →</a>
+        </div>
+
+        <div class="space-y-3">
+          {
+            recentBlog.map((b) => {
+              const slug = b.id.replace(/\.(md|mdx)$/, '');
+              return (
+                <a
+                  href={`/blog/${slug}/`}
+                  class="block p-4 rounded-xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-sm transition-all group"
+                >
+                  <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span class="font-medium text-brand-600">{b.data.category}</span>
+                    <span>{b.data.pubDate.toISOString().slice(0, 10)}</span>
+                  </div>
+                  <h3 class="text-sm font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+                    {b.data.title}
+                  </h3>
+                  <p class="text-xs text-slate-500 mt-1 line-clamp-1">{b.data.description}</p>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 12: FAQ (围绕核心关键词与搜索意图) -->
+  <section class="bg-white py-16 border-t border-slate-200">
+    <div class="max-w-prose mx-auto px-4 sm:px-6">
+      <FaqAccordion
+        items={homepageFaq}
+        title="关于机场推荐与梯子选购的常见问题 (FAQ)"
+        description="针对新手与出海用户围绕价格、专线稳定性、客户端适配与安全隐私最常询问的问题客观解答。"
+      />
+    </div>
+  </section>
+</BaseLayout>

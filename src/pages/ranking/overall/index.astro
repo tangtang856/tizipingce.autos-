@@ -1,0 +1,139 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import RankingTable from '@/components/RankingTable.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import { getRankedAirports } from '@/data/airports';
+
+const airports = getRankedAirports('overall');
+
+const pageTitle = '2026优质机场与梯子综合排行榜 | 全维度实力评测 - 梯子评测网';
+const pageDescription = '2026年最新机场节点与VPN梯子综合排行榜。基于真实骨干网络带宽、IPLC内网专线稳定性、晚高峰抗封锁能力、流媒体与ChatGPT解锁及运维信誉进行多维度综合评分。';
+
+const breadcrumbs = [
+  { label: '综合排行', href: '/ranking/overall/' },
+];
+
+const faqItems = [
+  {
+    question: '综合排行榜是依据什么维度评选排名的？',
+    answer: '综合榜不单纯看测速跑分，而是综合考察网络线路架构（是否为物理内网专线 IPLC/IEPL）、晚高峰 20:00-23:00 丢包率、流媒体及 ChatGPT 原生 IP 解锁率、运营年限与跑路风险、售后工单响应速度等 5 大核心维度。',
+  },
+  {
+    question: '排名第一的机场一定适合所有人吗？',
+    answer: '不一定。排名靠前的品牌如花云、TAG 虽综合稳定性极高，但起步单价也相对更高。如果是轻度查资料或预算有限，排名中高性价比的飞鸟云或快狗云可能更为合适。建议结合自身预算与使用场景选择。',
+  },
+  {
+    question: '本排行榜的实测数据多久更新一次？',
+    answer: '评测团队每周进行多地运营商（电信、联通、移动）的连通性与延迟探测，每月中旬更新一次全网综合榜单。当某家机场出现大范围线路重构或价格变动时，系统会在 48 小时内核实并同步修正。',
+  },
+];
+
+// Schema ItemList
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '2026优质机场与梯子综合排行榜',
+  description: pageDescription,
+  itemListElement: airports.map((airport, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: airport.name,
+    url: `https://tizipingce.autos/airport/${airport.slug}/`,
+  })),
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Hero Header -->
+    <header class="max-w-3xl mb-10">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
+        <span>🏆 2026 年度旗舰榜单</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        2026 优质机场与梯子综合实力排行榜
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        拒绝单一测速截图与虚构评分。本榜单基于真实专线网络架构、全天候抗封锁表现、节点可用率及用户长期信誉口碑进行全景量化评测，帮助出海用户快速锁定值得信赖的机场服务。
+      </p>
+      <div class="mt-4 flex flex-wrap gap-4 text-xs text-slate-500">
+        <span>📅 最近核验更新：2026年3月</span>
+        <span>🔍 评测样本：全网主流品牌</span>
+        <span>⚖️ 评测原则：客观中立 / 数据溯源</span>
+      </div>
+    </header>
+
+    <!-- Quick Takeaways -->
+    <div class="bg-gradient-to-br from-brand-500/10 via-brand-500/5 to-transparent border border-brand-200 rounded-2xl p-6 mb-10">
+      <h2 class="text-base font-bold text-brand-900 mb-2 flex items-center gap-2">
+        <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        本期核心结论与选购速览
+      </h2>
+      <ul class="text-sm text-slate-700 space-y-1.5 list-disc pl-5 leading-relaxed">
+        <li><strong>极致稳定与商务首选：</strong><a href="/airport/flowercloud/" class="text-brand-600 hover:underline font-semibold">FlowerCloud (花云)</a> 采用双程内网 IPLC 专线，敏感时期网络波动极小，支持多设备并发。</li>
+        <li><strong>特种地区与流媒体王者：</strong><a href="/airport/tag-internet/" class="text-brand-600 hover:underline font-semibold">TAG Internet</a> 覆盖全球 92+ 国家节点，包含海量冷门流媒体原生 IP，季付/年付极佳。</li>
+        <li><strong>性价比日常全能推荐：</strong><a href="/airport/flyingbird/" class="text-brand-600 hover:underline font-semibold">FlyingBird (飞鸟云)</a> 月付 15 元起步，BGP/IPLC 混合架构兼顾速度与钱包。</li>
+      </ul>
+    </div>
+
+    <!-- Overall Ranking Table -->
+    <section class="mb-14">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">综合排行榜明细表格</h2>
+          <p class="text-xs text-slate-500 mt-0.5">按综合实力权重总分降序排列，点击表头各品牌可查看详细参数与评测</p>
+        </div>
+        <a href="/compare/" class="text-xs font-semibold text-brand-600 hover:underline">去同屏对比参数 →</a>
+      </div>
+      <RankingTable airports={airports} />
+    </section>
+
+    <!-- Detailed Airport Cards -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">入选品牌深度解析与适配分析</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          airports.map((airport, index) => (
+            <AirportCard airport={airport} rankBadge={index + 1} />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Scoring Criteria -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-14 text-sm text-slate-700 space-y-4">
+      <h2 class="text-lg font-bold text-slate-900">公开综合评分权重与依据</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <span class="block text-2xl font-black text-brand-600 mb-1">35%</span>
+          <span class="font-bold text-slate-900 block mb-1">晚高峰稳定性 (SLA)</span>
+          <p class="text-xs text-slate-500">实测 20:00-23:00 丢包率与连接抖动，内网物理专线权重高于公网中继。</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <span class="block text-2xl font-black text-brand-600 mb-1">25%</span>
+          <span class="font-bold text-slate-900 block mb-1">解锁能力与 IP 纯净</span>
+          <p class="text-xs text-slate-500">ChatGPT、Claude、Netflix、Disney+ 原生解锁可用性及风控拦截率。</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <span class="block text-2xl font-black text-brand-600 mb-1">20%</span>
+          <span class="font-bold text-slate-900 block mb-1">价格合理度与单价</span>
+          <p class="text-xs text-slate-500">基础套餐月付门槛与每 GB 实际可用带宽单价的折算性价比。</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <span class="block text-2xl font-black text-brand-600 mb-1">20%</span>
+          <span class="font-bold text-slate-900 block mb-1">运营历史与信誉</span>
+          <p class="text-xs text-slate-500">已运营年限、工单响应时效、敏感时期公告透明度及无跑路历史。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <FaqAccordion items={faqItems} title="综合排行榜常见疑问解答" />
+  </div>
+</BaseLayout>

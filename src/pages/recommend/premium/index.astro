@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports().filter((a) => (a.startingPrice ?? 0) >= 35);
+
+const pageTitle = '高端专线机场推荐 | IPLC/IEPL企业级高速稳定网络 - 梯子评测网';
+const pageDescription = '2026年高端专线机场推荐。精选采用企业级物理 IPLC / IEPL 内网专线的一线机场服务商，完全不经过 GFW 审查，延迟极低，晚高峰超清4K秒开，商务外贸与极客出海首选。';
+
+const breadcrumbs = [
+  { label: '机场推荐', href: '/recommend/budget/' },
+  { label: '高端专线推荐', href: '/recommend/premium/' },
+];
+
+const faqItems = [
+  {
+    question: '高端专线机场为什么比普通中继机场贵这么多？',
+    answer: '主要成本在于跨国内网物理专线（IPLC/IEPL）的租用费用。物理专线属于点对点私有通道，价格按兆（Mbps）计费且极其高昂，但能彻底避开公网墙的干扰和丢包，带来丝滑稳定的网络体验。',
+  },
+  {
+    question: '高端专线对跨国远程会议（如 Zoom、Google Meet）有明显改善吗？',
+    answer: '非常显著。普通中继在晚高峰经常出现 5%-15% 的丢包，导致会议音频断续、画面卡死；物理专线能保持 0% 丢包率与极低的抖动（Jitter），音视频会议如同在内网中进行。',
+  },
+];
+
+const relatedLinks = [
+  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
+  { title: '机场稳定性排行榜', href: '/ranking/stable/', category: '排行榜' },
+  { title: '机场节点类型全解析：IPLC与IEPL', href: '/glossary/node-types/', category: '术语百科' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200 mb-3">
+        <span>⚡ 物理专线与企业级SLA</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        高端专线机场推荐：IPLC/IEPL 旗舰级出海网络
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        专为跨国外贸企业、海外远程开发团队、重度流媒体发烧友以及对网络掉线“零容忍”的高要求用户量身打造。所有入选品牌均部署物理企业内网专线，在任何敏感时期均能稳健通行。
+      </p>
+    </header>
+
+    <section class="mb-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {airports.map((airport) => (
+          <AirportCard airport={airport} highlightFeature="物理企业专线" />
+        ))}
+      </div>
+    </section>
+
+    <FaqAccordion items={faqItems} title="高端专线核心技术与疑问解答" />
+    <RelatedArticles links={relatedLinks} />
+  </div>
+</BaseLayout>

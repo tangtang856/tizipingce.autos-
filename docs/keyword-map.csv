@@ -1,0 +1,30 @@
+Keyword,Intent,Target URL,Page Type,Priority,Title,H1
+机场推荐,Commercial Investigation,/,Homepage,P0,2026最新机场推荐与梯子选购指南 | 梯子评测网,2026年稳定优质机场推荐与梯子评测指南
+梯子推荐,Commercial Investigation,/,Homepage,P0,2026最新机场推荐与梯子选购指南 | 梯子评测网,2026年稳定优质机场推荐与梯子评测指南
+性价比机场,Commercial Investigation,/ranking/value/,Ranking,P0,2026高性价比机场排行榜 | 每GB单价测算与套餐横评,高性价比机场综合排行榜与实测评选
+vpn推荐,Commercial Investigation,/ranking/overall/,Ranking,P0,2026优质VPN与机场节点综合排行榜 | 梯子评测网,2026全网优质VPN与机场节点综合实力排行榜
+vpn机场,Informational / Commercial,/blog/vpn-vs-airport-guide/,Blog,P1,VPN与机场的区别是什么？哪种更适合翻墙与日常使用？,深入解析VPN与机场节点的核心区别与选购建议
+机场节点,Informational,/glossary/node-types/,Glossary,P1,机场节点类型全解析：IPLC、IEPL、BGP与直连节点有什么区别？,机场节点核心类型科普与选择要点
+vpn节点,Informational,/glossary/what-is-vpn-node/,Glossary,P1,什么是VPN节点？工作原理与安全配置要点科普,VPN节点基础知识与安全配置指南
+低预算机场,Commercial Investigation,/recommend/budget/,Pillar,P1,便宜好用的低预算机场推荐 | 学生党与轻度用户首选,低预算平价机场与备用梯子节点推荐
+高端专线机场,Commercial Investigation,/recommend/premium/,Pillar,P1,高端专线机场推荐 | IPLC/IEPL企业级高速稳定网络,高端IPLC/IEPL专线机场深度评选
+新手入门机场,Informational / Commercial,/recommend/beginner/,Pillar,P1,新手友好型机场推荐 | 一键导入与全平台客户端配置,小白新手首选机场与零门槛使用指南
+稳定优先机场,Commercial Investigation,/recommend/stable/,Pillar,P1,抗封锁高稳定性机场推荐 | 晚高峰不卡顿测评,高稳定性抗封锁机场推荐与晚高峰表现评测
+ChatGPT/AI机场,Commercial Investigation,/recommend/ai/,Pillar,P1,支持ChatGPT与Claude的AI专用机场推荐 | 原生IP纯净节点,ChatGPT与海外AI工具专用高纯净度机场推荐
+流媒体解锁机场,Commercial Investigation,/recommend/streaming/,Pillar,P1,Netflix/Disney+/YouTube流媒体解锁机场推荐,4K流媒体超清秒开机场节点选购指南
+低预算排行榜,Commercial Investigation,/ranking/budget/,Ranking,P1,2026平价低预算机场排行榜 | 10元以下套餐横向对比,2026平价低预算机场排行榜
+稳定性排行榜,Commercial Investigation,/ranking/stable/,Ranking,P1,2026机场稳定性排行榜 | 晚高峰抗封锁表现实测榜,2026机场网络连接稳定性排行榜
+Windows使用教程,Guide,/guides/windows/,Guide,P1,Windows电脑客户端配置教程 | Clash Verge与v2rayN指南,Windows系统机场客户端安装与订阅导入完整教程
+Android使用教程,Guide,/guides/android/,Guide,P1,Android安卓手机客户端配置教程 | Clash Meta与Surfboard指南,Android安卓手机科学上网客户端配置教程
+iOS使用教程,Guide,/guides/ios/,Guide,P1,iOS苹果手机客户端配置教程 | Shadowrocket与小火箭指南,iPhone与iPad苹果设备科学上网客户端配置教程
+macOS使用教程,Guide,/guides/macos/,Guide,P1,Mac苹果电脑客户端配置教程 | Clash Verge Rev与Surge指南,macOS苹果电脑科学上网客户端配置与订阅教程
+机场横向比较,Interactive Tool,/compare/,Tool,P0,在线机场参数横向对比工具 | 价格流量线路全方位比对,在线机场参数与套餐配置横向对比工具
+常见协议科普,Informational,/glossary/protocols/,Glossary,P2,Shadowsocks、Vmess、Trojan、Hysteria2协议区别科普,科学上网常见代理协议优缺点深度对比
+订阅链接安全,Informational / Security,/blog/subscription-security/,Blog,P2,机场订阅链接泄露怎么办？如何保护节点隐私与安全？,机场订阅链接安全防范与隐私防护指南
+如何挑选梯子,Informational / Guide,/blog/how-to-choose-airport/,Blog,P1,如何科学挑选适合自己的机场梯子？避坑防跑路完整指南,如何科学挑选适合自己的机场梯子：避坑防踩雷指南
+全平台客户端对比,Guide / Blog,/blog/clients-comparison/,Blog,P1,全平台主流代理客户端对比与推荐指南,全平台主流科学上网客户端横向评测与选型指南
+关于本站,Trust,/about/,Page,P2,关于梯子评测网 | 独立客观的中文网络工具评测媒体,关于梯子评测网（tizipingce.autos）
+编辑政策,Trust,/editorial-policy/,Page,P2,编辑政策与评测准则 | 梯子评测网,梯子评测网编辑政策、数据核验与评测标准
+联系我们,Trust,/contact/,Page,P2,联系我们 | 商务合作与信息勘误,联系我们
+免责声明,Trust,/disclaimer/,Page,P2,免责声明与服务合规提示 | 梯子评测网,免责声明与合规使用提示
+隐私政策,Trust,/privacy-policy/,Page,P2,隐私政策 | 梯子评测网数据与Cookie保护说明,隐私政策

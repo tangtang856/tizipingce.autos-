@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports();
+
+const pageTitle = '独立机场评测专栏 | 真实数据核验与晚高峰测速 - 梯子评测网';
+const pageDescription = '梯子评测网独立机场评测专栏。收录各大主流机场与梯子节点的长周期实测报告，杜绝假跑分与虚假好评，深入拆解套餐价格、物理专线质量与实际优缺点。';
+
+const breadcrumbs = [
+  { label: '独立评测', href: '/review/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-10">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
+        <span>🔬 客观数据溯源</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        独立机场深度评测专栏
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        所有评测均遵循公开客观的测试准则，明确区分“官方宣传参数”与“实际抓包测试数据”。坚持对缺点不掩饰、对虚标不妥协，为你提供真实可靠的出海决策参考。
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+      {
+        airports.map((airport) => (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:shadow-md transition-shadow group">
+            <div>
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <span>核验日期: {airport.lastVerified}</span>
+                <span class="font-bold text-brand-600">{airport.ratingScore} / 10 分</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-2">
+                <a href={`/review/${airport.slug}/`}>{airport.name}</a>
+              </h2>
+              <p class="text-xs text-slate-500 mb-4 line-clamp-2">{airport.tagline}</p>
+              <div class="p-3 bg-slate-50 rounded-xl text-xs space-y-1 text-slate-600 mb-4 border border-slate-100">
+                <div><strong>线路：</strong>{airport.lineType}</div>
+                <div><strong>起步：</strong>¥{airport.startingPrice}/月起</div>
+                <div><strong>协议：</strong>{airport.protocols.slice(0, 2).join(', ')}</div>
+              </div>
+            </div>
+            <a
+              href={`/review/${airport.slug}/`}
+              class="w-full text-center py-2.5 px-4 rounded-xl text-xs font-semibold bg-brand-50 text-brand-700 hover:bg-brand-100 transition-colors border border-brand-200 block"
+            >
+              阅读深度评测报告 →
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

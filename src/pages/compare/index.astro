@@ -1,0 +1,267 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getAllAirports } from '@/data/airports';
+
+const airports = getAllAirports();
+
+const pageTitle = '机场参数横向对比工具 | 价格流量线路全方位比对 - 梯子评测网';
+const pageDescription = '支持选择 2-4 家主流机场与梯子节点进行横向深度参数比对。涵盖月付价格、流量折算每GB单价、专线线路类型、AI与流媒体解锁支持等关键指标。';
+
+const breadcrumbs = [
+  { label: '机场对比', href: '/compare/' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 mb-3">
+        <span>⚡ 在线交互工具</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        主流机场与梯子参数横向对比工具
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        自由选择 2 至 4 家已核验的机场品牌，在同屏进行套餐资费、每 GB 成本、专线架构、地区覆盖、AI 解锁及客户端兼容性的精准比对，助你理性决策，避开虚假宣传。
+      </p>
+    </header>
+
+    <!-- Selection Bar -->
+    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm mb-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900">请勾选待对比的机场品牌（2 - 4 家）</h2>
+          <p class="text-xs text-slate-500 mt-0.5">勾选后下方比对表格将实时自动生成与更新</p>
+        </div>
+        <div id="selection-count" class="text-xs font-semibold px-3 py-1 bg-slate-100 rounded-full text-slate-700">
+          已选择 <span id="count-num">3</span> / 4 家
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2.5" id="checkbox-group">
+        {
+          airports.map((airport, index) => {
+            const isDefaultChecked = index < 3;
+            return (
+              <label class="cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  name="airport-select"
+                  value={airport.slug}
+                  checked={isDefaultChecked}
+                  class="sr-only peer"
+                />
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 bg-white text-slate-700 peer-checked:bg-brand-50 peer-checked:text-brand-700 peer-checked:border-brand-500 peer-checked:shadow-sm hover:border-slate-300 transition-all">
+                  <span class="w-2 h-2 rounded-full bg-slate-300 peer-checked:bg-brand-600"></span>
+                  {airport.name}
+                </span>
+              </label>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden p-12 text-center bg-white rounded-2xl border border-dashed border-slate-300 my-8">
+      <div class="w-12 h-12 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h3 class="text-base font-bold text-slate-800">未选择足够的机场</h3>
+      <p class="text-xs text-slate-500 mt-1">请在上方的复选框中至少选择 2 家机场以展开横向对比。</p>
+    </div>
+
+    <!-- Dynamic Comparison Table Container -->
+    <div id="compare-table-wrapper" class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm mb-12">
+      <table class="w-full text-left border-collapse text-sm min-w-[700px]">
+        <thead class="bg-slate-50/80 border-b border-slate-200">
+          <tr id="table-head-row">
+            <th class="py-4 px-5 font-semibold text-slate-500 uppercase tracking-wider text-xs w-48 sticky left-0 bg-slate-50 z-10 border-r border-slate-200">
+              比对维度
+            </th>
+            <!-- Dynamic columns inserted by script -->
+          </tr>
+        </thead>
+        <tbody id="table-body" class="divide-y divide-slate-100">
+          <!-- Rows will be injected by script -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Methodology & Notes -->
+    <div class="p-6 rounded-2xl bg-slate-100/70 border border-slate-200 text-xs text-slate-600 space-y-2">
+      <h3 class="font-bold text-slate-800 text-sm">参数对比计算标准与数据来源说明：</h3>
+      <p>1. <strong>每 GB 单价估算：</strong>以官方公开的基础入门月付套餐实际流量折算；若套餐具有倍率节点（如高倍率 3x 或 0.5x 节点），实际消耗按标准 1.0x 节点标称计算。</p>
+      <p>2. <strong>AI 与流媒体解锁：</strong>受各海外平台反机器人与风控策略影响，IP 解锁状态可能周期性变动，标有“支持”代表对应机场团队提供长期原生 IP 维护与维护工单保障。</p>
+      <p>3. <strong>设备限制：</strong>指同一时间并发连接外网的终端上限，不限制安装客户端的设备总数。</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<!-- Pass JSON airport database to client -->
+<script define:vars={{ airports }}>
+  const data = airports;
+
+  const checkboxes = document.querySelectorAll('input[name="airport-select"]');
+  const countNum = document.getElementById('count-num');
+  const emptyState = document.getElementById('empty-state');
+  const tableWrapper = document.getElementById('compare-table-wrapper');
+  const headRow = document.getElementById('table-head-row');
+  const tableBody = document.getElementById('table-body');
+
+  function getSelectedSlugs() {
+    return Array.from(checkboxes)
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value);
+  }
+
+  function renderTable() {
+    const selectedSlugs = getSelectedSlugs();
+    countNum.textContent = selectedSlugs.length;
+
+    if (selectedSlugs.length < 2) {
+      emptyState.classList.remove('hidden');
+      tableWrapper.classList.add('hidden');
+      return;
+    }
+
+    emptyState.classList.add('hidden');
+    tableWrapper.classList.remove('hidden');
+
+    const selectedAirports = data.filter((a) => selectedSlugs.includes(a.slug));
+
+    // Clear and rebuild head
+    headRow.innerHTML = `
+      <th class="py-4 px-5 font-semibold text-slate-500 uppercase tracking-wider text-xs w-48 sticky left-0 bg-slate-50 z-10 border-r border-slate-200">
+        比对维度
+      </th>
+    `;
+
+    selectedAirports.forEach((airport) => {
+      const th = document.createElement('th');
+      th.className = 'py-4 px-5 min-w-[220px] text-slate-900 font-bold';
+      th.innerHTML = `
+        <div class="flex items-center justify-between">
+          <a href="/airport/${airport.slug}/" class="text-base text-brand-600 hover:underline">
+            ${airport.name}
+          </a>
+          <button data-remove="${airport.slug}" class="remove-btn text-xs text-slate-400 hover:text-red-500 p-1">✕</button>
+        </div>
+        <div class="text-xs font-normal text-slate-500 mt-1">${airport.tagline}</div>
+      `;
+      headRow.appendChild(th);
+    });
+
+    // Rows to render
+    const rows = [
+      {
+        label: '起步价格',
+        getValue: (a) => `<span class="font-bold text-slate-900 text-base">¥${a.startingPrice}</span> /起`,
+      },
+      {
+        label: '入门套餐流量',
+        getValue: (a) => `${a.plans[0]?.trafficGB ?? '-'} GB / 月`,
+      },
+      {
+        label: '每 GB 折算单价',
+        getValue: (a) => {
+          const minP = Math.min(...a.plans.map((p) => p.price / p.trafficGB)).toFixed(3);
+          return `<span class="font-semibold text-brand-600">约 ¥${minP}</span>`;
+        },
+      },
+      {
+        label: '骨干网络架构',
+        getValue: (a) => `<span class="inline-flex px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800">${a.lineType}</span>`,
+      },
+      {
+        label: '协议支持',
+        getValue: (a) => a.protocols.join(', '),
+      },
+      {
+        label: '节点覆盖地区',
+        getValue: (a) => a.regions.slice(0, 5).join('、') + (a.regions.length > 5 ? '等' : ''),
+      },
+      {
+        label: '在线设备限制',
+        getValue: (a) => a.deviceLimit || '尚未核实',
+      },
+      {
+        label: 'ChatGPT / AI 解锁',
+        getValue: (a) => a.aiSupport?.slice(0, 3).join(', ') || '未实测',
+      },
+      {
+        label: '海外流媒体解锁',
+        getValue: (a) => a.streamingSupport?.slice(0, 3).join(', ') || '未实测',
+      },
+      {
+        label: '核心优势',
+        getValue: (a) => `<span class="text-emerald-700 font-medium">${a.advantages[0]}</span>`,
+      },
+      {
+        label: '注意事项',
+        getValue: (a) => `<span class="text-amber-700">${a.disadvantages[0]}</span>`,
+      },
+      {
+        label: '快速行动',
+        getValue: (a) => `
+          <div class="flex items-center gap-2 pt-1">
+            <a href="/review/${a.slug}/" class="text-xs px-2.5 py-1.5 rounded bg-brand-50 text-brand-700 font-medium hover:bg-brand-100">深度评测</a>
+            ${a.affiliateUrl ? `<a href="${a.affiliateUrl}" target="_blank" rel="nofollow noopener noreferrer" class="text-xs px-2.5 py-1.5 rounded bg-brand-600 text-white font-medium hover:bg-brand-700">官网直达</a>` : ''}
+          </div>
+        `,
+      },
+    ];
+
+    tableBody.innerHTML = '';
+    rows.forEach((r, idx) => {
+      const tr = document.createElement('tr');
+      tr.className = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/40';
+
+      let rowHtml = `
+        <td class="py-3.5 px-5 font-medium text-slate-700 text-xs sm:text-sm sticky left-0 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'} z-10 border-r border-slate-200">
+          ${r.label}
+        </td>
+      `;
+
+      selectedAirports.forEach((airport) => {
+        rowHtml += `<td class="py-3.5 px-5 text-xs sm:text-sm text-slate-700">${r.getValue(airport)}</td>`;
+      });
+
+      tr.innerHTML = rowHtml;
+      tableBody.appendChild(tr);
+    });
+
+    // Bind remove button handlers
+    document.querySelectorAll('.remove-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const slug = btn.getAttribute('data-remove');
+        const cb = document.querySelector(`input[name="airport-select"][value="${slug}"]`);
+        if (cb) {
+          cb.checked = false;
+          renderTable();
+        }
+      });
+    });
+  }
+
+  // Handle max 4 limit & change event
+  checkboxes.forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const selected = getSelectedSlugs();
+      if (selected.length > 4) {
+        cb.checked = false;
+        alert('对比工具同屏最多支持 4 家机场对比，请先取消勾选其他品牌。');
+        return;
+      }
+      renderTable();
+    });
+  });
+
+  // Initial render
+  renderTable();
+</script>

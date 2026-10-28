@@ -1,0 +1,102 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import RankingTable from '@/components/RankingTable.astro';
+import AirportCard from '@/components/AirportCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import { getRankedAirports } from '@/data/airports';
+
+const airports = getRankedAirports('value');
+
+const pageTitle = '2026高性价比机场排行榜 | 每GB单价测算与套餐横评 - 梯子评测网';
+const pageDescription = '2026年高性价比机场排行榜与梯子节点推荐。根据各大机场基础套餐的实际可用流量、每GB折算单价、倍率系数及月付门槛进行精准排序，拒绝隐形套路。';
+
+const breadcrumbs = [
+  { label: '机场排行', href: '/ranking/overall/' },
+  { label: '性价比排行', href: '/ranking/value/' },
+];
+
+const faqItems = [
+  {
+    question: '性价比排行榜是怎样计算每 GB 单价的？',
+    answer: '我们采用官方基础套餐的月付或对应周期标称价格除以实际可用有效流量。例如 15 元 100GB，折算单价为 0.15 元/GB。同时，我们会剔除虚高的高倍率节点（如 3x/5x 消耗节点），确保计算基准公平透明。',
+  },
+  {
+    question: '每 GB 单价越便宜就越值得买吗？',
+    answer: '并非绝对。部分极低价机场（如 1 元/月或 0.02元/GB）多采用超售严重的公网普通直连线路，高峰期丢包率极高，甚至存在严重跑路风险。真正的高性价比应在“可用率不低于 95%”的前提下追求低单价。',
+  },
+  {
+    question: '年付套餐通常更便宜，新手应该直接买年付吗？',
+    answer: '强烈不建议新手首次购买就选择年付！任何代理服务都面临不可预测的 GFW 封锁与网络波动。新手务必先选择月付或季付，在日常体验满足需求且经历过敏感期考验后，再考虑长期订阅以获取折扣。',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '2026高性价比机场排行榜',
+  description: pageDescription,
+  itemListElement: airports.map((airport, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: airport.name,
+    url: `https://tizipingce.autos/airport/${airport.slug}/`,
+  })),
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="max-w-3xl mb-10">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-3">
+        <span>💰 每 GB 成本严谨测算</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        2026 高性价比机场与梯子节点排行榜
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed">
+        告别华而不实的宣传口号。本榜单以官方公开套餐资费、实际流量供给以及单 GB 真实折算成本为核心排序依据，严查倍率暗坑，帮你用最合理的预算买到充沛且稳定的网络配额。
+      </p>
+    </header>
+
+    <!-- Quick Formula Card -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 mb-10 shadow-sm">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">性价比计算公式与核验规范</h2>
+      <div class="p-4 rounded-xl bg-slate-50 font-mono text-sm text-slate-800 border border-slate-200/80 mb-3">
+        真实单价 (元/GB) = [ 套餐期付价格 (元) ] ÷ [ 实际到账可用流量 (GB) × 节点平均基准倍率 ]
+      </div>
+      <p class="text-xs text-slate-500 leading-relaxed">
+        * 注意事项：1. 不限时按量套餐不直接与月付套餐混同排序；2. 标称 1000GB 但节点全为 5x 倍率的虚假流量套餐，本站按折后 200GB 实际容量进行重新计算；3. 未通过实测的野生低价机场不纳入本排名。
+      </p>
+    </div>
+
+    <!-- Ranking Table with Unit Price -->
+    <section class="mb-14">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">性价比榜单详细排名（按单价排序）</h2>
+          <p class="text-xs text-slate-500 mt-0.5">以基础套餐折算单价由低到高排列</p>
+        </div>
+        <a href="/ranking/overall/" class="text-xs font-semibold text-brand-600 hover:underline">查看综合实力榜 →</a>
+      </div>
+      <RankingTable airports={airports} showUnitPrice={true} />
+    </section>
+
+    <!-- Cards Grid -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">入选高性价比品牌评析</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          airports.map((airport, index) => (
+            <AirportCard airport={airport} rankBadge={index + 1} highlightFeature="高性价比代表" />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <FaqAccordion items={faqItems} title="性价比机场常见选购陷阱与FAQ" />
+  </div>
+</BaseLayout>
