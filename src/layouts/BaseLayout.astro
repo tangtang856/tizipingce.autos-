@@ -288,17 +288,20 @@ const organizationSchema = {
     </style>
   </head>
   <body class="relative text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
-    <!-- Dreamy Pastel Mesh & Iridescent Grid Background Layer -->
+    <!-- Dreamy Fox Illustration & Grid Aesthetic Background Layer -->
     <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden select-none" aria-hidden="true">
-      <div class="dreamy-base-mesh"></div>
-      <div class="dreamy-orb dreamy-orb-blue-1"></div>
-      <div class="dreamy-orb dreamy-orb-yellow-1"></div>
-      <div class="dreamy-orb dreamy-orb-blue-2"></div>
-      <div class="dreamy-orb dreamy-orb-yellow-2"></div>
-      <div class="dreamy-orb dreamy-orb-rainbow"></div>
-      <div class="dreamy-highlight-bloom"></div>
-      <div class="dreamy-grid-mesh"></div>
-      <div class="dreamy-iridescent-glow"></div>
+      <!-- High-resolution dreamy fox wallpaper background -->
+      <img
+        src="/bg.jpg"
+        alt=""
+        class="w-full h-full object-cover object-center fixed inset-0 -z-20 pointer-events-none select-none"
+      />
+      <!-- Soft translucent ambient lighting to enhance contrast & legibility -->
+      <div class="fixed inset-0 -z-10 bg-white/20 backdrop-blur-[0.5px]"></div>
+      <!-- Subtle top light bloom & delicate iridescent grid mesh -->
+      <div class="dreamy-highlight-bloom opacity-50"></div>
+      <div class="dreamy-grid-mesh opacity-25"></div>
+      <div class="dreamy-iridescent-glow opacity-30"></div>
     </div>
 
     <Header currentPath={currentPath} />
