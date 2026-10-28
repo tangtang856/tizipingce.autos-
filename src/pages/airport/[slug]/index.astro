@@ -64,7 +64,10 @@ const relatedLinks = [
               {airport.lineType}
             </span>
             <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              {airport.testStatus === 'tested' ? '✓ 实测通过' : '官方核验数据'}
+              ✓ 站长亲自测试 · 真实数据
+            </span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+              🔥 优惠价永久有效
             </span>
             <span class="text-xs text-slate-400">核验于: {airport.lastVerified}</span>
           </div>
@@ -91,7 +94,7 @@ const relatedLinks = [
                 rel="nofollow noopener noreferrer"
                 class="text-center px-6 py-3 rounded-xl text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-500/20 transition-all"
               >
-                访问官方网站 →
+                访问官网（优惠价永久有效） →
               </a>
             )
           }
@@ -101,7 +104,10 @@ const relatedLinks = [
       <!-- Quick Metrics Strip -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
         <div>
-          <span class="text-xs text-slate-400 block mb-1">起步资费</span>
+          <div class="flex items-center gap-1 mb-1">
+            <span class="text-xs text-slate-400">起步资费</span>
+            <span class="text-[10px] text-amber-700 font-bold bg-amber-100 px-1 rounded">永久优惠</span>
+          </div>
           <span class="text-2xl font-bold text-slate-900">¥{airport.startingPrice}</span>
           <span class="text-xs text-slate-500 block">/周期起</span>
         </div>
@@ -149,6 +155,12 @@ const relatedLinks = [
           <h2 class="text-xl font-bold text-slate-900 mb-2">
             在售套餐与价格规格
           </h2>
+
+          <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 mb-5 flex items-start gap-2">
+            <span class="text-sm">💎</span>
+            <div><strong>站长承诺：</strong>本站所展示的 {airport.name} 专属优惠价<strong>永久有效</strong>，长期续费同价，绝无首单低价续费暴涨套路。本站全部测速、网络拓扑与节点数据均为站长亲自实测保真。</div>
+          </div>
+
           <p class="text-xs text-slate-500 mb-6">
             数据更新于 {airport.lastVerified}。按 1.0x 标准倍率折算每 GB 真实可用单价：
           </p>

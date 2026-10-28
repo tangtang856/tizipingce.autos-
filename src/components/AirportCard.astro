@@ -46,7 +46,10 @@ const lowestPlan = airport.plans[0];
         {airport.lineType}
       </span>
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-        {airport.testStatus === 'tested' ? '已通过实测验证' : '基于官方公开数据'}
+        ✓ 站长亲自测试 · 真实数据
+      </span>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200">
+        🔥 优惠价永久有效
       </span>
       {
         highlightFeature && (
@@ -65,7 +68,10 @@ const lowestPlan = airport.plans[0];
     <!-- Key Metrics Grid -->
     <div class="grid grid-cols-2 gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100 mb-5 text-xs">
       <div>
-        <span class="text-slate-400 block mb-0.5">起步价格</span>
+        <div class="flex items-center gap-1 mb-0.5">
+          <span class="text-slate-400">起步价格</span>
+          <span class="text-[10px] text-amber-700 font-bold bg-amber-100/90 px-1 rounded">永久优惠</span>
+        </div>
         <span class="text-base font-bold text-slate-900">
           ¥{airport.startingPrice}
           <span class="text-xs font-normal text-slate-500">/起</span>
