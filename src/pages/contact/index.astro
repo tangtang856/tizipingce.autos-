@@ -26,32 +26,76 @@ const breadcrumbs = [
 
       <div class="space-y-8 text-sm sm:text-base text-slate-700">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
-            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold mb-4">
-              ✉️
+          <!-- Telegram Card -->
+          <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-50/70 to-sky-50/50 border border-blue-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-[#229ED9] text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                </svg>
+              </div>
+              <div class="flex items-center justify-between mb-1">
+                <h2 class="text-lg font-bold text-slate-900">Telegram 官方沟通</h2>
+                <span class="text-xs text-emerald-700 bg-emerald-100 font-semibold px-2 py-0.5 rounded-full">优先在线</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-3">支持快速即时交流、商务洽谈与节点测速复核</p>
+              <div class="p-2.5 rounded-xl bg-white border border-blue-100 font-mono font-bold text-sm text-slate-800 mb-4 select-all">
+                @xintangtang
+              </div>
             </div>
-            <h2 class="text-lg font-bold text-slate-900 mb-1">官方联络邮箱</h2>
-            <p class="text-xs text-slate-500 mb-3">日常咨询与重要事务对接</p>
-            <a href="mailto:contact@tizipingce.autos" class="text-brand-600 font-mono font-medium hover:underline text-sm">
-              contact@tizipingce.autos
+            <a
+              href="https://t.me/xintangtang"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full text-center py-2.5 px-4 rounded-xl bg-[#229ED9] hover:bg-[#1e8dbf] text-white text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-1.5"
+            >
+              <span>立即在 Telegram 发起对话</span>
+              <span>→</span>
             </a>
           </div>
 
-          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
-            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold mb-4">
-              🐙
+          <!-- Gmail Card -->
+          <div class="p-6 rounded-2xl bg-gradient-to-br from-rose-50/70 to-red-50/50 border border-red-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-[#EA4335] text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </div>
+              <div class="flex items-center justify-between mb-1">
+                <h2 class="text-lg font-bold text-slate-900">Gmail 官方商务邮箱</h2>
+                <span class="text-xs text-slate-600 bg-white border border-slate-200 font-medium px-2 py-0.5 rounded-full">正式工单</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-3">日常商务合作、媒体联络与详细勘误证据递交</p>
+              <div class="p-2.5 rounded-xl bg-white border border-red-100 font-mono font-bold text-sm text-slate-800 mb-4 select-all truncate">
+                xintangtang888@gmail.com
+              </div>
             </div>
-            <h2 class="text-lg font-bold text-slate-900 mb-1">GitHub 仓库</h2>
-            <p class="text-xs text-slate-500 mb-3">提出 Issue 或提交 PR 勘误</p>
             <a
-              href="https://github.com/tangtang856/tizipingce.autos"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-brand-600 font-mono font-medium hover:underline text-sm"
+              href="mailto:xintangtang888@gmail.com"
+              class="w-full text-center py-2.5 px-4 rounded-xl bg-[#EA4335] hover:bg-[#d9382b] text-white text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-1.5"
             >
-              github.com/tangtang856/tizipingce.autos
+              <span>发送邮件到 Gmail</span>
+              <span>✉️</span>
             </a>
           </div>
+        </div>
+
+        <!-- Security & Anti-Fraud Notice -->
+        <div class="p-6 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-amber-900 space-y-2">
+          <div class="font-bold flex items-center gap-1.5 text-base text-amber-950">
+            <span>🛡️</span>
+            <span>站长官方防伪与安全郑重提示</span>
+          </div>
+          <p>
+            1. <strong>唯一官方账号：</strong>梯子评测网（tizipingce.autos）站长仅有上述唯一的 Gmail（<code class="bg-white/80 px-1 py-0.5 rounded">xintangtang888@gmail.com</code>）与 Telegram（<code class="bg-white/80 px-1 py-0.5 rounded">@xintangtang</code>），绝无任何其他“客服代理”、“返利中介”或“代充托管”账号。
+          </p>
+          <p>
+            2. <strong>防范欺诈骗局：</strong>本站严禁并不会在 Telegram 或邮件中主动私信索要您的银行卡密码、助记词或要求转账。所有机场服务请直接通过官方控制台正规支付。
+          </p>
+          <p>
+            3. <strong>真实实测承诺：</strong>本站所发布的所有评测均为站长亲自真实多端测试抓包，优惠价永久有效，欢迎业内同行与广大出海网友监督交流。
+          </p>
         </div>
 
         <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-3">
