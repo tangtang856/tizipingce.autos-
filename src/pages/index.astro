@@ -53,7 +53,7 @@ const faqSchema = {
 
 <BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} schema={faqSchema}>
   <!-- Section 2: Hero Section -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-surface-50 to-surface-50 pt-12 pb-16 border-b border-slate-200">
+  <section class="relative overflow-hidden pt-12 pb-16 border-b border-white/60">
     <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center">
         <!-- Trust badge -->
@@ -88,7 +88,7 @@ const faqSchema = {
           </a>
           <a
             href="/compare/"
-            class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-all"
+            class="px-6 py-3 rounded-xl bg-white/80 hover:bg-white text-slate-700 border border-slate-200 font-semibold text-sm shadow-sm transition-all"
           >
             ⚡ 在线横向对比工具
           </a>
@@ -113,7 +113,7 @@ const faqSchema = {
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm">
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+        <div class="p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-white/70 shadow-xs">
           <h3 class="font-bold text-slate-900 mb-1">新手小白如何选？</h3>
           <p class="text-slate-600 text-xs leading-relaxed">
             选择提供全平台“一键导入订阅”的品牌，先买月付（15-20元档），配合本站新手教程 3 分钟即可配置完毕。
@@ -121,7 +121,7 @@ const faqSchema = {
           <a href="/recommend/beginner/" class="inline-block mt-2 font-semibold text-brand-600 text-xs hover:underline">新手专区 →</a>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+        <div class="p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-white/70 shadow-xs">
           <h3 class="font-bold text-slate-900 mb-1">哪些指标最关键？</h3>
           <p class="text-slate-600 text-xs leading-relaxed">
             物理专线（IPLC）优于公网中转；全天丢包率低于 1% 优于单纯的并发测速峰值；原生 IP 解锁决定了 AI 和流媒体体验。
@@ -129,7 +129,7 @@ const faqSchema = {
           <a href="/glossary/node-types/" class="inline-block mt-2 font-semibold text-brand-600 text-xs hover:underline">节点科普 →</a>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+        <div class="p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-white/70 shadow-xs">
           <h3 class="font-bold text-slate-900 mb-1">如何判断是否划算？</h3>
           <p class="text-slate-600 text-xs leading-relaxed">
             查看“每 GB 折算单价”并警惕高倍率陷阱（标称 500G 但全为 3x 倍率等于虚标）。真正高性价比应在 0.1-0.2 元/GB 左右。
@@ -137,7 +137,7 @@ const faqSchema = {
           <a href="/ranking/value/" class="inline-block mt-2 font-semibold text-brand-600 text-xs hover:underline">单价测算榜 →</a>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+        <div class="p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-white/70 shadow-xs">
           <h3 class="font-bold text-slate-900 mb-1">购买前必须检查什么？</h3>
           <p class="text-slate-600 text-xs leading-relaxed">
             严禁盲目购买大额年付！坚持月付尝鲜，检查服务商运营时间是否超 1-2 年，并保留第二家平价机场作为故障互备。
@@ -171,7 +171,7 @@ const faqSchema = {
   </section>
 
   <!-- Section 5: 综合排行榜预览 (Comprehensive Ranking) -->
-  <section class="bg-white py-16 border-y border-slate-200">
+  <section class="py-16 border-y border-white/60 bg-white/65 backdrop-blur-md">
     <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
@@ -303,7 +303,7 @@ const faqSchema = {
   </section>
 
   <!-- Section 9: 教程中心 (Guides Showcase) -->
-  <section class="bg-slate-100/60 py-16 border-t border-slate-200">
+  <section class="py-16 border-t border-white/60 bg-white/50 backdrop-blur-md">
     <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between mb-8">
         <div>
@@ -414,7 +414,7 @@ const faqSchema = {
   </section>
 
   <!-- Section 12: FAQ (围绕核心关键词与搜索意图) -->
-  <section class="bg-white py-16 border-t border-slate-200">
+  <section class="py-16 border-t border-white/60 bg-white/65 backdrop-blur-md">
     <div class="max-w-prose mx-auto px-4 sm:px-6">
       <FaqAccordion
         items={homepageFaq}
