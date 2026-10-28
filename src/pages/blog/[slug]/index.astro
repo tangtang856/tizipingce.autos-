@@ -2,17 +2,53 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import RelatedArticles from '@/components/RelatedArticles.astro';
+import ArticleNavigation from '@/components/ArticleNavigation.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id.replace(/\.(md|mdx)$/, '') },
-    props: { post },
-  }));
+  // Sort posts by date descending
+  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return posts.map((post, index) => {
+    // Reading sequence: next is the next article in list
+    const prevPost = index > 0 ? {
+      title: posts[index - 1].data.title,
+      href: `/blog/${posts[index - 1].id.replace(/\.(md|mdx)$/, '')}/`,
+      category: posts[index - 1].data.category,
+    } : null;
+
+    const nextPost = index < posts.length - 1 ? {
+      title: posts[index + 1].data.title,
+      href: `/blog/${posts[index + 1].id.replace(/\.(md|mdx)$/, '')}/`,
+      category: posts[index + 1].data.category,
+    } : null;
+
+    // Pick 3 related articles from same category or fallback
+    const sameCategory = posts
+      .filter((p) => p.id !== post.id && p.data.category === post.data.category)
+      .slice(0, 3);
+    const fallbacks = posts.filter((p) => p.id !== post.id).slice(0, 3);
+    const related = sameCategory.length >= 2 ? sameCategory : fallbacks;
+
+    const relatedLinks = [
+      ...related.map((p) => ({
+        title: p.data.title,
+        href: `/blog/${p.id.replace(/\.(md|mdx)$/, '')}/`,
+        category: p.data.category,
+      })),
+      { title: '2026年机场综合实力排行榜', href: '/ranking/overall/', category: '权威排行' },
+      { title: '多品牌同屏横向对比工具', href: '/compare/', category: '在线工具' },
+    ];
+
+    return {
+      params: { slug: post.id.replace(/\.(md|mdx)$/, '') },
+      props: { post, prevPost, nextPost, relatedLinks },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost, relatedLinks } = Astro.props;
 const { Content } = await render(post);
 
 const pageTitle = `${post.data.title} | 梯子评测网`;
@@ -21,12 +57,6 @@ const pageDescription = post.data.description;
 const breadcrumbs = [
   { label: '博客文章', href: '/blog/' },
   { label: post.data.title, href: `/blog/${post.id.replace(/\.(md|mdx)$/, '')}/` },
-];
-
-const relatedLinks = [
-  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
-  { title: '高性价比机场排行榜', href: '/ranking/value/', category: '排行榜' },
-  { title: '多品牌同屏横向对比工具', href: '/compare/', category: '在线工具' },
 ];
 
 const articleSchema = {
@@ -71,6 +101,16 @@ const articleSchema = {
         <Content />
       </div>
 
+      <!-- Previous / Next Article Navigation -->
+      <ArticleNavigation
+        prev={prevPost}
+        next={nextPost}
+        hubHref="/blog/"
+        hubLabel="返回博客中心"
+        typeLabel="文章"
+      />
+
+      <!-- Related articles and cross internal links -->
       <RelatedArticles links={relatedLinks} />
     </article>
   </div>

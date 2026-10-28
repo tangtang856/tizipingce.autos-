@@ -1,0 +1,104 @@
+---
+interface NavItem {
+  title: string;
+  href: string;
+  category?: string;
+}
+
+interface Props {
+  prev?: NavItem | null;
+  next?: NavItem | null;
+  hubHref?: string;
+  hubLabel?: string;
+  typeLabel?: string;
+}
+
+const {
+  prev,
+  next,
+  hubHref = '/blog/',
+  hubLabel = '返回文章列表',
+  typeLabel = '文章',
+} = Astro.props;
+---
+
+<nav aria-label="文章上下篇导航" class="my-10 pt-8 border-t border-slate-200 not-prose">
+  <div class="flex items-center justify-between mb-4">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">阅读导航 · 连续游览</span>
+    <a href={hubHref} class="text-xs font-medium text-brand-600 hover:text-brand-700 hover:underline">
+      {hubLabel} →
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <!-- Previous Link -->
+    {
+      prev ? (
+        <a
+          href={prev.href}
+          class="group flex flex-col justify-between p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all text-left"
+        >
+          <div class="flex items-center gap-1.5 text-xs text-slate-400 group-hover:text-brand-600 transition-colors mb-2 font-medium">
+            <svg class="w-3.5 h-3.5 transform group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>上一篇{typeLabel}</span>
+            {prev.category && (
+              <span class="ml-1 px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 text-[10px]">
+                {prev.category}
+              </span>
+            )}
+          </div>
+          <div class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-brand-600 line-clamp-2 leading-snug">
+            {prev.title}
+          </div>
+        </a>
+      ) : (
+        <a
+          href={hubHref}
+          class="flex flex-col justify-between p-4 sm:p-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-colors text-left"
+        >
+          <span class="text-xs text-slate-400 font-medium mb-2">已是本专栏第一篇</span>
+          <span class="text-sm font-semibold text-slate-600 hover:text-brand-600">
+            {hubLabel}
+          </span>
+        </a>
+      )
+    }
+
+    <!-- Next Link -->
+    {
+      next ? (
+        <a
+          href={next.href}
+          class="group flex flex-col justify-between p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-brand-300 hover:shadow-md transition-all text-right sm:text-right"
+        >
+          <div class="flex items-center justify-end gap-1.5 text-xs text-slate-400 group-hover:text-brand-600 transition-colors mb-2 font-medium">
+            {next.category && (
+              <span class="mr-1 px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 text-[10px]">
+                {next.category}
+              </span>
+            )}
+            <span>下一篇{typeLabel}</span>
+            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-brand-600 line-clamp-2 leading-snug">
+            {next.title}
+          </div>
+        </a>
+      ) : (
+        <a
+          href={hubHref}
+          class="flex flex-col justify-between p-4 sm:p-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-colors text-right"
+        >
+          <span class="text-xs text-slate-400 font-medium mb-2">已是本专栏最新一篇</span>
+          <span class="text-sm font-semibold text-slate-600 hover:text-brand-600">
+            {hubLabel}
+          </span>
+        </a>
+      )
+    }
+  </div>
+</nav>

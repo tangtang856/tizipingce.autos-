@@ -2,17 +2,51 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import RelatedArticles from '@/components/RelatedArticles.astro';
+import ArticleNavigation from '@/components/ArticleNavigation.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
-  return guides.map((guide) => ({
-    params: { slug: guide.id.replace(/\.(md|mdx)$/, '') },
-    props: { guide },
-  }));
+  // Sort guides by date descending
+  guides.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return guides.map((guide, index) => {
+    const prevGuide = index > 0 ? {
+      title: guides[index - 1].data.title,
+      href: `/guides/${guides[index - 1].id.replace(/\.(md|mdx)$/, '')}/`,
+      category: guides[index - 1].data.difficulty || '教程',
+    } : null;
+
+    const nextGuide = index < guides.length - 1 ? {
+      title: guides[index + 1].data.title,
+      href: `/guides/${guides[index + 1].id.replace(/\.(md|mdx)$/, '')}/`,
+      category: guides[index + 1].data.difficulty || '教程',
+    } : null;
+
+    // Pick related guides
+    const related = guides
+      .filter((g) => g.id !== guide.id)
+      .slice(0, 3)
+      .map((g) => ({
+        title: g.data.title,
+        href: `/guides/${g.id.replace(/\.(md|mdx)$/, '')}/`,
+        category: '精选教程',
+      }));
+
+    const relatedLinks = [
+      ...related,
+      { title: '2026年机场综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
+      { title: '多品牌同屏横向对比工具', href: '/compare/', category: '在线工具' },
+    ];
+
+    return {
+      params: { slug: guide.id.replace(/\.(md|mdx)$/, '') },
+      props: { guide, prevGuide, nextGuide, relatedLinks },
+    };
+  });
 }
 
-const { guide } = Astro.props;
+const { guide, prevGuide, nextGuide, relatedLinks } = Astro.props;
 const { Content } = await render(guide);
 
 const pageTitle = `${guide.data.title} | 梯子评测网教程中心`;
@@ -29,13 +63,6 @@ const platformLabels: Record<string, string> = {
 const breadcrumbs = [
   { label: '使用教程', href: '/guides/' },
   { label: guide.data.title, href: `/guides/${guide.id.replace(/\.(md|mdx)$/, '')}/` },
-];
-
-const relatedLinks = [
-  { title: '2026综合实力排行榜', href: '/ranking/overall/', category: '排行榜' },
-  { title: '高性价比机场排行榜', href: '/ranking/value/', category: '排行榜' },
-  { title: '多品牌同屏横向对比工具', href: '/compare/', category: '在线工具' },
-  { title: '常见代理协议优缺点深度科普', href: '/glossary/protocols/', category: '术语百科' },
 ];
 
 const articleSchema = {
@@ -78,6 +105,16 @@ const articleSchema = {
         <Content />
       </div>
 
+      <!-- Previous / Next Guide Navigation -->
+      <ArticleNavigation
+        prev={prevGuide}
+        next={nextGuide}
+        hubHref="/guides/"
+        hubLabel="返回教程中心"
+        typeLabel="教程"
+      />
+
+      <!-- Related links -->
       <RelatedArticles links={relatedLinks} />
     </article>
   </div>

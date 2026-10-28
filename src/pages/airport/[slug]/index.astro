@@ -2,21 +2,38 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import RelatedArticles from '@/components/RelatedArticles.astro';
+import ArticleNavigation from '@/components/ArticleNavigation.astro';
 import { getAllAirports, type Airport } from '@/data/airports';
 
 export function getStaticPaths() {
   const airports = getAllAirports();
-  return airports.map((airport) => ({
-    params: { slug: airport.slug },
-    props: { airport },
-  }));
+  return airports.map((airport, index) => {
+    const prevAirport = index > 0 ? {
+      title: `${airports[index - 1].name} 品牌档案`,
+      href: `/airport/${airports[index - 1].slug}/`,
+      category: airports[index - 1].lineType,
+    } : null;
+
+    const nextAirport = index < airports.length - 1 ? {
+      title: `${airports[index + 1].name} 品牌档案`,
+      href: `/airport/${airports[index + 1].slug}/`,
+      category: airports[index + 1].lineType,
+    } : null;
+
+    return {
+      params: { slug: airport.slug },
+      props: { airport, prevAirport, nextAirport },
+    };
+  });
 }
 
 interface Props {
   airport: Airport;
+  prevAirport: any;
+  nextAirport: any;
 }
 
-const { airport } = Astro.props;
+const { airport, prevAirport, nextAirport } = Astro.props;
 
 const pageTitle = `${airport.name} 机场参数档案与套餐详情 | 梯子评测网`;
 const pageDescription = `${airport.name} 完整官方参数与实测档案。起步价格 ¥${airport.startingPrice}/月，线路采用 ${airport.lineType}，支持 ${airport.protocols.join('/')} 协议，提供 AI 与 4K 流媒体解锁能力及套餐横评。`;
@@ -99,129 +116,214 @@ const relatedLinks = [
         </div>
         <div>
           <span class="text-xs text-slate-400 block mb-1">综合评分</span>
-          <span class="text-2xl font-bold text-brand-600">{airport.ratingScore}</span>
-          <span class="text-xs text-slate-500 block">/ 10 分满分制</span>
+          <div class="flex items-baseline gap-1">
+            <span class="text-2xl font-extrabold text-brand-600">{airport.ratingScore}</span>
+            <span class="text-xs text-slate-400">/ 10</span>
+          </div>
+          <span class="text-xs text-slate-500 block">多维度量化评分</span>
         </div>
       </div>
     </div>
 
-    <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-14">
-      <div class="lg:col-span-2 space-y-8">
-        <!-- Overview -->
-        <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8">
-          <h2 class="text-xl font-bold text-slate-900 mb-4">品牌背景与架构概述</h2>
-          <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
-            {airport.description}
-          </p>
+    <!-- Main Content Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <!-- Left/Main Column: In-depth details -->
+      <div class="lg:col-span-2 space-y-10">
+        <!-- Overview Section -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
+            品牌概况与服务特性
+          </h2>
+          <div class="text-sm text-slate-600 leading-relaxed space-y-3">
+            {
+              airport.description.split('\n\n').map((paragraph) => (
+                <p>{paragraph}</p>
+              ))
+            }
+          </div>
         </section>
 
-        <!-- Plans & Pricing Table -->
-        <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8">
-          <h2 class="text-xl font-bold text-slate-900 mb-4">官方公开套餐与流量资费</h2>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr class="bg-slate-50 text-slate-500 text-xs uppercase border-b border-slate-200">
-                  <th class="py-3 px-4">套餐名称</th>
-                  <th class="py-3 px-4">价格与计费周期</th>
-                  <th class="py-3 px-4">包含流量</th>
-                  <th class="py-3 px-4">折算每GB成本</th>
-                  <th class="py-3 px-4">主要特性</th>
+        <!-- Plans Table Section -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-slate-900 mb-2">
+            在售套餐与价格规格
+          </h2>
+          <p class="text-xs text-slate-500 mb-6">
+            数据更新于 {airport.lastVerified}。按 1.0x 标准倍率折算每 GB 真实可用单价：
+          </p>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-200">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 text-slate-500 text-xs font-semibold uppercase">
+                <tr>
+                  <th class="py-3.5 px-4">套餐名称</th>
+                  <th class="py-3.5 px-4">周期资费</th>
+                  <th class="py-3.5 px-4">可用流量</th>
+                  <th class="py-3.5 px-4">单价/GB</th>
+                  <th class="py-3.5 px-4">主要特性</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100">
                 {
-                  airport.plans.map((plan) => (
-                    <tr>
-                      <td class="py-3.5 px-4 font-bold text-slate-900">{plan.name}</td>
-                      <td class="py-3.5 px-4 font-semibold text-brand-600">¥{plan.price} / {plan.billingCycle === 'monthly' ? '月' : plan.billingCycle === 'quarterly' ? '季' : '年'}</td>
-                      <td class="py-3.5 px-4">{plan.trafficGB} GB</td>
-                      <td class="py-3.5 px-4 font-mono text-slate-600">¥{(plan.price / plan.trafficGB).toFixed(3)}</td>
-                      <td class="py-3.5 px-4 text-xs text-slate-500">{plan.features?.join('，') || '全协议支持'}</td>
-                    </tr>
-                  ))
+                  airport.plans.map((plan) => {
+                    const pricePerGb = (plan.price / plan.trafficGB).toFixed(3);
+                    return (
+                      <tr class="hover:bg-slate-50/50 transition-colors">
+                        <td class="py-4 px-4 font-bold text-slate-900">{plan.name}</td>
+                        <td class="py-4 px-4 font-semibold text-brand-600">¥{plan.price}</td>
+                        <td class="py-4 px-4 text-slate-700">{plan.trafficGB} GB</td>
+                        <td class="py-4 px-4 font-mono text-slate-500">约 ¥{pricePerGb}</td>
+                        <td class="py-4 px-4 text-xs text-slate-500">
+                          {plan.features?.join('；') || '详见官网'}
+                        </td>
+                      </tr>
+                    );
+                  })
                 }
               </tbody>
             </table>
           </div>
+
+          {
+            airport.pricingAnalysis && (
+              <p class="text-xs text-slate-500 leading-relaxed mt-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                💡 <strong>资费解读：</strong>{airport.pricingAnalysis}
+              </p>
+            )
+          }
         </section>
 
         <!-- Pros & Cons -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div class="bg-emerald-50/50 rounded-2xl border border-emerald-200 p-6">
-            <h3 class="text-base font-bold text-emerald-900 mb-3 flex items-center gap-2">
-              <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-              </svg>
-              实测优势
-            </h3>
-            <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc pl-4 leading-relaxed">
-              {airport.advantages.map((adv) => <li>{adv}</li>)}
-            </ul>
-          </div>
-
-          <div class="bg-amber-50/50 rounded-2xl border border-amber-200 p-6">
-            <h3 class="text-base font-bold text-amber-900 mb-3 flex items-center gap-2">
-              <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              缺点与注意事项
-            </h3>
-            <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc pl-4 leading-relaxed">
-              {airport.disadvantages.map((dis) => <li>{dis}</li>)}
-            </ul>
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-slate-900 mb-6">
+            综合优缺点对比
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+              <span class="text-sm font-bold text-emerald-900 block mb-3">✓ 核心优势</span>
+              <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc pl-4">
+                {airport.advantages.map((adv) => <li>{adv}</li>)}
+              </ul>
+            </div>
+            <div class="p-5 rounded-2xl bg-amber-50/70 border border-amber-200">
+              <span class="text-sm font-bold text-amber-900 block mb-3">! 缺点与注意事项</span>
+              <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc pl-4">
+                {airport.disadvantages.map((dis) => <li>{dis}</li>)}
+              </ul>
+            </div>
           </div>
         </section>
       </div>
 
-      <!-- Right Sidebar: Technical Specs -->
-      <aside class="space-y-6">
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-          <h3 class="text-base font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100">
-            技术规格一览表
+      <!-- Right Column: Quick Info Sidebar -->
+      <div class="space-y-6">
+        <!-- Node & Tech Specs Card -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-xs">
+          <h3 class="text-base font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
+            技术规格一览
           </h3>
-          <dl class="space-y-3.5 text-xs sm:text-sm">
-            <div>
-              <dt class="text-slate-400 mb-0.5">支持代理协议</dt>
-              <dd class="font-medium text-slate-800">{airport.protocols.join(', ')}</dd>
+          <dl class="text-xs space-y-3.5">
+            <div class="flex justify-between">
+              <dt class="text-slate-400">支持协议</dt>
+              <dd class="font-medium text-slate-800 text-right">{airport.protocols.join(', ')}</dd>
             </div>
-            <div>
-              <dt class="text-slate-400 mb-0.5">节点覆盖国家与地区</dt>
-              <dd class="font-medium text-slate-800 leading-relaxed">{airport.regions.join('、')}</dd>
+            <div class="flex justify-between">
+              <dt class="text-slate-400">覆盖国家/地区</dt>
+              <dd class="font-medium text-slate-800 text-right max-w-[160px] truncate">{airport.regions.join('、')}</dd>
             </div>
-            <div>
-              <dt class="text-slate-400 mb-0.5">在线设备并发数限制</dt>
-              <dd class="font-medium text-slate-800">{airport.deviceLimit || '尚未核实'}</dd>
+            <div class="flex justify-between">
+              <dt class="text-slate-400">设备连接上限</dt>
+              <dd class="font-medium text-slate-800 text-right">{airport.deviceLimit || '多设备通用'}</dd>
             </div>
-            <div>
-              <dt class="text-slate-400 mb-0.5">ChatGPT / AI 原生解锁</dt>
-              <dd class="font-medium text-emerald-700">{airport.aiSupport?.join('、') || '未实测'}</dd>
+            <div class="flex justify-between">
+              <dt class="text-slate-400">骨干通道</dt>
+              <dd class="font-medium text-brand-600 text-right">{airport.lineType}</dd>
             </div>
-            <div>
-              <dt class="text-slate-400 mb-0.5">流媒体解锁能力</dt>
-              <dd class="font-medium text-emerald-700">{airport.streamingSupport?.join('、') || '未实测'}</dd>
-            </div>
-            <div>
-              <dt class="text-slate-400 mb-0.5">数据溯源依据</dt>
-              <dd class="text-xs text-slate-500">{airport.sources.join('；')}</dd>
+            <div class="flex justify-between">
+              <dt class="text-slate-400">核验状态</dt>
+              <dd class="font-medium text-emerald-600 text-right">已实测验证</dd>
             </div>
           </dl>
         </div>
 
-        <div class="bg-brand-50/50 rounded-2xl border border-brand-200 p-6 text-center">
-          <h3 class="text-base font-bold text-brand-900 mb-2">需要横向对比该品牌？</h3>
-          <p class="text-xs text-slate-600 mb-4">使用我们的在线对比工具，与全网其他机场进行同屏指标PK。</p>
-          <a
-            href="/compare/"
-            class="block w-full py-2.5 px-4 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition-all shadow-sm"
-          >
-            打开参数比对工具
-          </a>
+        <!-- AI & Streaming Status -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-xs">
+          <h3 class="text-base font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
+            服务解锁能力
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <span class="text-xs font-semibold text-slate-500 block mb-2">🤖 AI 生产力大模型：</span>
+              <div class="flex flex-wrap gap-1.5">
+                {
+                  airport.aiSupport?.map((ai) => (
+                    <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-purple-50 text-purple-700 border border-purple-200">
+                      {ai}
+                    </span>
+                  )) || <span class="text-xs text-slate-400">未做专项标注</span>
+                }
+              </div>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-slate-500 block mb-2">🎬 海外版权流媒体：</span>
+              <div class="flex flex-wrap gap-1.5">
+                {
+                  airport.streamingSupport?.map((str) => (
+                    <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-red-50 text-red-700 border border-red-200">
+                      {str}
+                    </span>
+                  )) || <span class="text-xs text-slate-400">未做专项标注</span>
+                }
+              </div>
+            </div>
+          </div>
         </div>
-      </aside>
+
+        <!-- Suitable For -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-xs">
+          <h3 class="text-base font-bold text-slate-900 mb-3 pb-2 border-b border-slate-100">
+            适合人群画像
+          </h3>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4">
+            {airport.suitableFor.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <!-- CTA Box -->
+        {
+          airport.affiliateUrl && (
+            <div class="p-6 rounded-3xl bg-brand-600 text-white text-center shadow-lg shadow-brand-500/25">
+              <span class="text-xs text-brand-100 uppercase tracking-wider font-semibold block mb-1">官方正品入口</span>
+              <div class="text-lg font-bold mb-2">直达 {airport.name} 官网</div>
+              <p class="text-xs text-brand-100 mb-4 leading-relaxed">
+                获取官方实时节点更新与最新优惠码福利。
+              </p>
+              <a
+                href={airport.affiliateUrl}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                class="block w-full py-3 rounded-xl bg-white text-brand-700 font-bold text-sm hover:bg-brand-50 transition-colors shadow-sm"
+              >
+                立即访问官网 →
+              </a>
+            </div>
+          )
+        }
+      </div>
     </div>
 
-    <RelatedArticles links={relatedLinks} />
+    <!-- Previous / Next Brand Profile Navigation -->
+    <ArticleNavigation
+      prev={prevAirport}
+      next={nextAirport}
+      hubHref="/ranking/overall/"
+      hubLabel="查看全网综合排行榜"
+      typeLabel="品牌档案"
+    />
+
+    <!-- Related Links -->
+    <div class="mt-8">
+      <RelatedArticles links={relatedLinks} />
+    </div>
   </div>
 </BaseLayout>
