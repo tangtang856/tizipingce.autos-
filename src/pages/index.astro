@@ -36,9 +36,22 @@ const homepageFaq = [
     answer: '现代机场支持全平台通用订阅。Windows 推荐使用 Clash Verge Rev；Android 推荐 Clash Meta 或 Surfboard；iOS 推荐 Shadowrocket（小火箭）；macOS 推荐 Clash Verge 或 Surge；电视端支持 Apple TV 与软路由旁路由透明网关。',
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homepageFaq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} schema={faqSchema}>
   <!-- Section 2: Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-surface-50 to-surface-50 pt-12 pb-16 border-b border-slate-200">
     <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">

@@ -100,9 +100,22 @@ const reviewSchema = {
     worstRating: 1,
   },
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} ogType="article" schema={reviewSchema}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} ogType="article" schema={[reviewSchema, faqSchema]}>
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <Breadcrumbs items={breadcrumbs} />
 

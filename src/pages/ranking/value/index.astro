@@ -8,8 +8,9 @@ import { getRankedAirports } from '@/data/airports';
 
 const airports = getRankedAirports('value');
 
-const pageTitle = '2026高性价比机场排行榜 | 每GB单价测算与套餐横评 - 梯子评测网';
-const pageDescription = '2026年高性价比机场排行榜与梯子节点推荐。根据各大机场基础套餐的实际可用流量、每GB折算单价、倍率系数及月付门槛进行精准排序，拒绝隐形套路。';
+const pageTitle = '2026性价比机场推荐排行榜 | 便宜高性价比梯子推荐与每GB单价测算榜 - 梯子评测网';
+const pageDescription = '2026最新高性价比机场排行榜与梯子推荐。深度核算29家主流机场套餐实际可用流量、每GB折算单价、节点线路稳定性与月付门槛，拒绝虚假倍率，精选真正便宜好用的VPN机场。';
+const pageKeywords = '性价比机场, 性价比机场推荐, 梯子推荐, 机场推荐, 便宜机场, 便宜梯子, vpn机场, 机场节点';
 
 const breadcrumbs = [
   { label: '机场排行', href: '/ranking/overall/' },
@@ -31,7 +32,7 @@ const faqItems = [
   },
 ];
 
-const schema = {
+const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: '2026高性价比机场排行榜',
@@ -43,9 +44,22 @@ const schema = {
     url: `https://tizipingce.autos/airport/${airport.slug}/`,
   })),
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} schema={[itemListSchema, faqSchema]}>
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <Breadcrumbs items={breadcrumbs} />
 

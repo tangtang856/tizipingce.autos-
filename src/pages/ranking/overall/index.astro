@@ -8,8 +8,9 @@ import { getRankedAirports } from '@/data/airports';
 
 const airports = getRankedAirports('overall');
 
-const pageTitle = '2026优质机场与梯子综合排行榜 | 全维度实力评测 - 梯子评测网';
-const pageDescription = '2026年最新机场节点与VPN梯子综合排行榜。基于真实骨干网络带宽、IPLC内网专线稳定性、晚高峰抗封锁能力、流媒体与ChatGPT解锁及运维信誉进行多维度综合评分。';
+const pageTitle = '2026机场推荐综合实力排行榜 | 优质VPN机场、梯子推荐与VPN节点测速总榜 - 梯子评测网';
+const pageDescription = '2026最新机场推荐与梯子推荐综合排行榜。深度实测29家主流高性价比VPN机场与高速VPN节点，基于物理IPLC专线、晚高峰延迟与丢包率、流媒体及ChatGPT解锁提供权威排名与选购指南。';
+const pageKeywords = '机场推荐, 机场推荐排行榜, 梯子推荐, 梯子推荐排行榜, vpn推荐, vpn机场, vpn节点, 性价比机场, 机场节点';
 
 const breadcrumbs = [
   { label: '综合排行', href: '/ranking/overall/' },
@@ -22,7 +23,7 @@ const faqItems = [
   },
   {
     question: '排名第一的机场一定适合所有人吗？',
-    answer: '不一定。排名靠前的品牌如花云、TAG 虽综合稳定性极高，但起步单价也相对更高。如果是轻度查资料或预算有限，排名中高性价比的飞鸟云或快狗云可能更为合适。建议结合自身预算与使用场景选择。',
+    answer: '不一定。排名前列的品牌如暮光网络、飞猫云虽然综合稳定性和网络拓扑极佳，但各家套餐流量与价格梯度有所不同。如果是轻度查资料或预算有限，也可以选择中等资费的高性价比方案。建议结合自身预算与使用场景选择。',
   },
   {
     question: '本排行榜的实测数据多久更新一次？',
@@ -30,8 +31,8 @@ const faqItems = [
   },
 ];
 
-// Schema ItemList
-const schema = {
+// Schema ItemList & FAQPage
+const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: '2026优质机场与梯子综合排行榜',
@@ -43,9 +44,22 @@ const schema = {
     url: `https://tizipingce.autos/airport/${airport.slug}/`,
   })),
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+<BaseLayout title={pageTitle} description={pageDescription} keywords={pageKeywords} schema={[itemListSchema, faqSchema]}>
   <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <Breadcrumbs items={breadcrumbs} />
 
